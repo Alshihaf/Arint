@@ -1,0 +1,14 @@
+{
+  "id": "c4207206cec65f16",
+  "timestamp": 1772948365.2196372,
+  "entry": {
+    "type": "action",
+    "action": "REST",
+    "details": {
+      "cycle": 5,
+      "result": "Rested",
+      "success": true
+    },
+    "cycle": 5
+  }
+}

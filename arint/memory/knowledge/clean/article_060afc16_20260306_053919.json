@@ -1,0 +1,38 @@
+{
+  "id": "060afc162f8fb183",
+  "content": "AutoGPT: Build, Deploy, and Run AI Agents ! Discord Follow ! Twitter Follow Deutsch Español français 日本語 한국어 Português Русский 中文 AutoGPT is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows. Hosting Options - Download to self-host Free! - Join the Waitlist for the cloud-hosted beta Closed Beta - Public release Coming Soon! How to Self-Host the AutoGPT Platform !NOTE Setting up and hosting the AutoGPT Platform yourself is a technical process. If you'd rather something that just works, we recommend joining the waitlist for the cloud-hosted beta. System Requirements Before proceeding with the installation, ensure your system meets the following requirements: Hardware Requirements - CPU: 4 cores recommended - RAM: Minimum 8GB, 16GB recommended - Storage: At least 10GB of free space Software Requirements - Operating Systems: - Linux Ubuntu 20.04 or newer recommended - macOS 10.15 or newer - Windows 10 11 with WSL2 - Required",
+  "summary": "AutoGPT: Build, Deploy, and Run AI Agents ! Twitter Follow Deutsch Español français 日本語 한국어 Português Русский 中文 AutoGPT is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows. Hosting Options - Download to self-host Free! - Join the Waitlist for the cloud-hosted beta Closed Beta - Public release Coming Soon! How to Self-Host the AutoGPT Platform !NOTE Setting up and hosting the AutoGPT Platform yourself is a technical process.",
+  "key_points": [
+    "AutoGPT: Build, Deploy, and Run AI Agents !",
+    "Twitter Follow Deutsch Español français 日本語 한국어 Português Русский 中文 AutoGPT is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows.",
+    "Hosting Options - Download to self-host Free!",
+    "- Join the Waitlist for the cloud-hosted beta Closed Beta - Public release Coming Soon!",
+    "How to Self-Host the AutoGPT Platform !NOTE Setting up and hosting the AutoGPT Platform yourself is a technical process."
+  ],
+  "keywords": [
+    "autogpt",
+    "requirements",
+    "platform",
+    "beta",
+    "recommended",
+    "deploy",
+    "agents",
+    "follow",
+    "hosting",
+    "self",
+    "host",
+    "free",
+    "waitlist",
+    "cloud",
+    "hosted"
+  ],
+  "source": "github:readme:Significant-Gravitas/AutoGPT",
+  "length": 1003,
+  "quality": 0.7876749498340422,
+  "type": "article",
+  "hash": "060afc162f8fb183548ac8f15b81df3802c2c59437b60c8796c5a33787099703",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-03-06T05:39:19.340843",
+  "metadata": {}
+}

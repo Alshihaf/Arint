@@ -1,0 +1,36 @@
+{
+  "id": "63a65e5d39d5357e",
+  "goal_id": "primary",
+  "goal_description": "Explore deeper: Observed pattern: arm64 (848)...",
+  "steps": [
+    {
+      "action": "EXPLORE",
+      "params": {},
+      "expected_outcome": "Dapatkan informasi baru",
+      "completed": true,
+      "result": "No new data",
+      "timestamp": 1771725013.5931144
+    },
+    {
+      "action": "REASON",
+      "params": {},
+      "expected_outcome": "Hasilkan insight",
+      "completed": true,
+      "result": "Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "timestamp": 1771725017.8961334
+    },
+    {
+      "action": "ORGANIZE",
+      "params": {},
+      "expected_outcome": "Simpan pengetahuan",
+      "completed": true,
+      "result": "Organized",
+      "timestamp": 1771725023.0797365
+    }
+  ],
+  "created": 1771459551.5773015,
+  "last_updated": 1771725023.0797393,
+  "status": "completed",
+  "parent_plan_id": null,
+  "metadata": {}
+}

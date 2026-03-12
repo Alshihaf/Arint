@@ -1,0 +1,13 @@
+flags:
+  dream_enabled: true
+  internet: true
+  self_modify: true
+  verbose: true
+mode: autonomous
+name: Arint
+needs_defaults:
+  boredom: 30
+  fatigue: 0
+  hunger_data: 50
+  messiness: 10
+version: '6.0'

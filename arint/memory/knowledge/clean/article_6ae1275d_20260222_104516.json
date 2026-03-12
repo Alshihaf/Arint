@@ -1,0 +1,38 @@
+{
+  "id": "6ae1275d5ebed662",
+  "content": "Hacker News Hacker News new past comments ask show jobs submit login 1. How I use Claude Code: Separation of planning and execution boristane.com 132 points by vinhnx 2 hours ago hide 74 comments 2. Show HN: Llama 3.1 70B on a single RTX 3090 via NVMe-to-GPU bypassing the CPU github.com xaskasdf 109 points by xaskasdf 5 hours ago hide 27 comments 3. Evidence of the bouba-kiki effect in naïve baby chicks science.org 74 points by suddenlybananas 4 hours ago hide 22 comments 4. Parse, Don't Validate and Type-Driven Design in Rust harudagondi.space 130 points by todsacerdoti 7 hours ago hide 38 comments 5. How far back in time can you understand English? deadlanguagesociety.com 373 points by spzb 13 hours ago hide 221 comments 6. zclaw: personal AI assistant in under 888 KB, running on an ESP32 github.com tnm 104 points by tosh 7 hours ago hide 57 comments 7. A Botnet Accidentally Destroyed I2P sambent.com 13 points by Cider9986 1 hour ago hide 3 comments 8. Scientists discover recent tectonic activity on the moon phys.org 9 points by bookmtn 1 hour ago hide discuss 9. CXMT has been offering DDR4 chips at about half the prevailing market rate koreaherald.com 160 points by phront 12 hours ago hide 136 comments 10. EDuke32 Duke Nukem 3D Open-Source eduke32.com 155 points by reconnecting 6 hours ago hide 58 comments 11. Finding forall-exists Hyperbugs using Symbolic Execution acm.org 19 points by todsacerdoti 4 hours ago hide discuss 12. Claws are now a new layer on top of LLM agents twitter.com karpathy 202 points by Cyphase 14 hours ago hide 652 comments 13. Forward propagation of errors through time nicolaszucchet.github.io 7 points by iNic 2 hours ago hide discuss 14. Canvas_ity: A tiny, single-header -like 2D rasterizer for C github.com a-e-k 63 points by PaulHoule 7 hours ago hide 23 comments 15. Toyota Mirai hydrogen car depreciation: 65 value loss in a year carbuzz.com 99 points by iancmceachern 7 hours ago hide 239 comments 16. Inputlag.science Repository of knowledge about input lag in gaming inputlag.science 68 points by akyuu 7 hours ago hide 12 comments 17. What not to write on your security clearance form 1988 milk.com 387 points by wizardforhire 9 hours ago hide 171 comments 18. Personal Statement of a CIA Analyst antipolygraph.org 178 points by grubbs 8 hours ago hide 100 comments 19. I verified my LinkedIn identity. Here's what I handed over thelocalstack.eu 1183 points by ColinWright 19 hours ago hide 410 comments 20. Acme Weather acmeweather.com 201 points by cryptoz 19 hours ago hide 123 comments 21. Be wary of Bluesky kevinak.se 253 points by kevinak 18 hours ago hide 175 comments 22. Permacomputing xxiivv.com 103 points by tosh 10 hours ago hide 25 comments 23. Uncovering insiders and alpha on Polymarket with AI twitter.com peterjliu 132 points by somerandomness 19 hours ago hide 124 comments 24. Online Pebble Development repebble.com 21 points by teekert 5 hours ago hide 6 comments 25. I Don't Like Magic adactio.com 115 points by edent 7 hours ago hide 97 comments 26. Keep Android Open f-droid.org 1995 points by LorenDB 1 day ago hide 692 comments 27. A16z partner says that the theory that we ll vibe code everything is wrong aol.com 84 points by paulpauper 16 hours ago hide 118 comments 28. Show HN: Iron-Wolf Wolfenstein 3D source port in Rust github.com ragnaroek 62 points by ragnaroekX 10 hours ago hide 20 comments 29. Don't create .gitkeep files, use .gitignore instead 2023 adamj.eu 131 points by frou_dh 23 hours ago hide 77 comments 30. AI uBlock Blacklist github.com alvi-se 226 points by rdmuser 18 hours ago hide 100 comments More Guidelines FAQ Lists API Security Legal Apply to YC Contact Search:",
+  "summary": "Canvas_ity: A tiny, single-header -like 2D rasterizer for C github.com a-e-k 63 points by PaulHoule 7 hours ago hide 23 comments 15. Acme Weather acmeweather.com 201 points by cryptoz 19 hours ago hide 123 comments 21. Permacomputing xxiivv.com 103 points by tosh 10 hours ago hide 25 comments 23. Online Pebble Development repebble.com 21 points by teekert 5 hours ago hide 6 comments 25. I Don't Like Magic adactio.com 115 points by edent 7 hours ago hide 97 comments 26.",
+  "key_points": [
+    "Canvas_ity: A tiny, single-header -like 2D rasterizer for C github.com a-e-k 63 points by PaulHoule 7 hours ago hide 23 comments 15.",
+    "Acme Weather acmeweather.com 201 points by cryptoz 19 hours ago hide 123 comments 21.",
+    "Permacomputing xxiivv.com 103 points by tosh 10 hours ago hide 25 comments 23.",
+    "Online Pebble Development repebble.com 21 points by teekert 5 hours ago hide 6 comments 25.",
+    "I Don't Like Magic adactio.com 115 points by edent 7 hours ago hide 97 comments 26."
+  ],
+  "keywords": [
+    "points",
+    "ago",
+    "hide",
+    "comments",
+    "hours",
+    "com",
+    "github",
+    "org",
+    "show",
+    "science",
+    "discuss",
+    "hacker",
+    "news",
+    "new",
+    "use"
+  ],
+  "source": "https://news.ycombinator.com",
+  "length": 3685,
+  "quality": 0.6897909483278277,
+  "type": "article",
+  "hash": "6ae1275d5ebed662f6e9825bf233a84ea39d20d350c7927b3585062794ba63b6",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-02-22T10:45:16.998753",
+  "metadata": {}
+}

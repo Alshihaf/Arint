@@ -1,0 +1,14 @@
+{
+  "id": "bcf85ef80caebfab",
+  "timestamp": 1772931380.4225745,
+  "entry": {
+    "type": "action",
+    "action": "REST",
+    "details": {
+      "cycle": 6,
+      "result": "Rested",
+      "success": true
+    },
+    "cycle": 6
+  }
+}

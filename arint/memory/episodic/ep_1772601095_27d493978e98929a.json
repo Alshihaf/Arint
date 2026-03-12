@@ -1,0 +1,14 @@
+{
+  "id": "27d493978e98929a",
+  "timestamp": 1772601095.9650755,
+  "entry": {
+    "type": "action",
+    "action": "REST",
+    "details": {
+      "cycle": 267,
+      "result": "Rested",
+      "success": true
+    },
+    "cycle": 267
+  }
+}

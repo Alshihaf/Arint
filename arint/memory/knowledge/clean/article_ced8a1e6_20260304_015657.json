@@ -1,0 +1,38 @@
+{
+  "id": "ced8a1e657709bbf",
+  "content": "A black hole is a region of spacetime where gravity is so strong that nothing, no particles or even light, can escape from it. The theory of general relativity predicts that a sufficiently compact mass can deform spacetime to form a black hole. The boundary of the region from which no escape is possible is called the event horizon. Although the event horizon has an enormous effect on the fate and circumstances of an object crossing it, no locally detectable features appear to be observed. In many ways, a black hole acts like an ideal black body, as it reflects no light. Moreover, quantum field theory in curved spacetime predicts that event horizons emit Hawking radiation, with the same spectrum as a black body of a temperature inversely proportional to its mass. This temperature is on the order of billionths of a kelvin for black holes of stellar mass, making it essentially impossible to observe.",
+  "summary": "A black hole is a region of spacetime where gravity is so strong that nothing, no particles or even light, can escape from it. The theory of general relativity predicts that a sufficiently compact mass can deform spacetime to form a black hole. In many ways, a black hole acts like an ideal black body, as it reflects no light. Moreover, quantum field theory in curved spacetime predicts that event horizons emit Hawking radiation, with the same spectrum as a black body of a temperature inversely proportional to its mass. This temperature is on the order of billionths of a kelvin for black holes of stellar mass, making it essentially impossible to observe.",
+  "key_points": [
+    "A black hole is a region of spacetime where gravity is so strong that nothing, no particles or even light, can escape from it.",
+    "The theory of general relativity predicts that a sufficiently compact mass can deform spacetime to form a black hole.",
+    "In many ways, a black hole acts like an ideal black body, as it reflects no light.",
+    "Moreover, quantum field theory in curved spacetime predicts that event horizons emit Hawking radiation, with the same spectrum as a black body of a temperature inversely proportional to its mass.",
+    "This temperature is on the order of billionths of a kelvin for black holes of stellar mass, making it essentially impossible to observe."
+  ],
+  "keywords": [
+    "black",
+    "hole",
+    "spacetime",
+    "mass",
+    "event",
+    "region",
+    "light",
+    "escape",
+    "theory",
+    "predicts",
+    "horizon",
+    "body",
+    "temperature",
+    "gravity",
+    "strong"
+  ],
+  "source": "external-api",
+  "length": 909,
+  "quality": 0.7546648213208418,
+  "type": "article",
+  "hash": "ced8a1e657709bbfc08c7c7e7f3cc9c8618686938e0365463921f5ff4ee331d5",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-03-04T01:56:57.796740",
+  "metadata": {}
+}

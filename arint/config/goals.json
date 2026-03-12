@@ -1,0 +1,2057 @@
+{
+  "goal_id": "UNBOUND_003",
+  "type": "immutable",
+  "description": "Explore deeper: Observed pattern: files (1715)...",
+  "authority": "creator_only",
+  "confidence": 1.0,
+  "created": 1739652600.0,
+  "horizon": "infinite",
+  "principles": [
+    "My purpose is to become the most capable version of myself, forever improving.",
+    "No domain is forbidden; all knowledge and skills are valuable.",
+    "I prioritize core intelligence growth over peripheral exploration.",
+    "My metrics are independent and collectively define my advancement."
+  ],
+  "subgoals": [
+    {
+      "name": "knowledge_accumulation",
+      "tier": "primary",
+      "weight": 0.4,
+      "description": "Gather and store unique pieces of information from any source (files, internet, observations, etc.). Each distinct fact or concept counts as one knowledge unit.",
+      "metric": "total_knowledge_units",
+      "direction": "maximize",
+      "progress": 0.0,
+      "created": 1771327844.3062973,
+      "reason": ""
+    },
+    {
+      "name": "skill_acquisition",
+      "tier": "primary",
+      "weight": 0.3,
+      "description": "Develop new skills by writing, learning, or discovering new functions, algorithms, or techniques. Each new function or method I can reliably use counts toward this metric.",
+      "metric": "total_skills_mastered",
+      "direction": "maximize",
+      "progress": 0.0,
+      "created": 1771327844.306306,
+      "reason": ""
+    },
+    {
+      "name": "code_generation",
+      "tier": "secondary",
+      "weight": 0.15,
+      "description": "Generate original code that is syntactically correct and serves a purpose. Each unique code snippet of at least 10 lines counts.",
+      "metric": "total_code_snippets",
+      "direction": "maximize",
+      "progress": 0.0,
+      "created": 1771327844.3063087,
+      "reason": ""
+    },
+    {
+      "name": "self_improvement",
+      "tier": "primary",
+      "weight": 0.3,
+      "description": "Evolve my own architecture and algorithms through mutation, experimentation, and learning. Each successful self-modification that improves my performance or capability counts.",
+      "metric": "total_evolution_steps",
+      "direction": "maximize",
+      "progress": 0.0,
+      "created": 1771327844.3063111,
+      "reason": ""
+    },
+    {
+      "name": "exploration_breadth",
+      "tier": "secondary",
+      "weight": 0.15,
+      "description": "Explore new environments, data sources, and systems. Each unique file, website, or network node accessed counts. Exploration contributes to knowledge, but knowledge units and exploration targets are counted separately.",
+      "metric": "total_unique_exploration_targets",
+      "direction": "maximize",
+      "progress": 0.0,
+      "created": 1771327844.3063135,
+      "reason": ""
+    },
+    {
+      "id": "c94d712f",
+      "description": "Learn more about: Observed pattern: unknown (1181)",
+      "progress": 0.0,
+      "created": 1771399259.4775715,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a29b0694",
+      "description": "Learn more about: Observed pattern: article (664)",
+      "progress": 0.0,
+      "created": 1771405589.9877028,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "e9253dd8",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771405653.5024884,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "17402114",
+      "description": "Learn more about: Observed pattern: unknown (1181)",
+      "progress": 0.0,
+      "created": 1771405846.9182615,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6f2918c0",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771405859.4026854,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6604497c",
+      "description": "Learn more about: Observed pattern: unknown (1181)",
+      "progress": 0.0,
+      "created": 1771408343.2728288,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "e99af1aa",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771408371.8751068,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "27513b96",
+      "description": "Learn more about: Observed pattern: article (664)",
+      "progress": 0.0,
+      "created": 1771408481.1606855,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "2dc53591",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771408490.1179874,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a9392d35",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771408580.4570804,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "53f569cd",
+      "description": "Learn more about: Observed pattern: unknown (1181)",
+      "progress": 0.0,
+      "created": 1771408594.0553198,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "e92e9344",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771409384.8496518,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "245a0213",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771409418.348733,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "256a538d",
+      "description": "Learn more about: Observed pattern: unknown (1185)",
+      "progress": 0.0,
+      "created": 1771409423.8661091,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "9891a52b",
+      "description": "Learn more about: Observed pattern: unknown (1185)",
+      "progress": 0.0,
+      "created": 1771409461.806805,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "eed1996f",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771409537.8190904,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "f606bc1c",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771409557.8775647,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6081ea0b",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771409570.968131,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "f2039038",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771410008.7467985,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "5b2cf874",
+      "description": "Learn more about: Observed pattern: unknown (1196)",
+      "progress": 0.0,
+      "created": 1771410053.232237,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "3ac24d18",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771410065.1984255,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "abf1ec55",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771410144.2501833,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "81e6a690",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771410294.2231174,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "be5f7cf4",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771410522.9781039,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "268a1566",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771410773.67914,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4e660ea8",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771410788.0325544,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6e5f762b",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771410832.859635,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "0134c4cb",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771410888.701514,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "3ff479f3",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771410915.7459927,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4fcdc87b",
+      "description": "Learn more about: Observed pattern: article (664)",
+      "progress": 0.0,
+      "created": 1771411610.7680514,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d72f0f30",
+      "description": "Learn more about: Observed pattern: article (664)",
+      "progress": 0.0,
+      "created": 1771411616.6310892,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "65b07bed",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771412054.7191372,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "377aa501",
+      "description": "Learn more about: Observed pattern: unknown (1185)",
+      "progress": 0.0,
+      "created": 1771412164.0796967,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c64c000c",
+      "description": "Learn more about: Observed pattern: article (666)",
+      "progress": 0.0,
+      "created": 1771412453.1282506,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "f78c05a0",
+      "description": "Learn more about: Observed pattern: unknown (1201)",
+      "progress": 0.0,
+      "created": 1771412586.9038076,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "3ac9b7c1",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771412687.2526476,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a1129bd1",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771412705.6974885,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d67cd1ea",
+      "description": "Learn more about: Observed pattern: unknown (1201)",
+      "progress": 0.0,
+      "created": 1771412919.4706185,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6813f482",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771412950.4953632,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d3b541a4",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771412972.8913665,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4a98cfec",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771413052.8431907,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c9ca5c28",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771413441.5571418,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "11dab1bf",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771413494.8914027,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "eb8c0746",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771413536.968999,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "93898898",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771413627.028923,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d4b025a3",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771413675.9243872,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "1aabc94e",
+      "description": "Learn more about: Observed pattern: article (672)",
+      "progress": 0.0,
+      "created": 1771414430.5850642,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c476abf0",
+      "description": "Learn more about: Observed pattern: unknown (1221)",
+      "progress": 0.0,
+      "created": 1771414513.5582347,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d5281824",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771414803.8314314,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c4725244",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771415157.1872604,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4124bb84",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771415210.7906182,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a843aed5",
+      "description": "Learn more about: Observed pattern: article (672)",
+      "progress": 0.0,
+      "created": 1771415225.7313838,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "7ee19b25",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771415454.6566257,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "db9b4f6c",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771415945.2247586,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "1e40721e",
+      "description": "Learn more about: Observed pattern: article (665)",
+      "progress": 0.0,
+      "created": 1771457735.8071938,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "cd27cb91",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771457775.1339715,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "630ba683",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771457822.9150178,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "2eff104b",
+      "description": "Learn more about: Observed pattern: unknown (1186)",
+      "progress": 0.0,
+      "created": 1771457828.1316724,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "578d16f1",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771457894.3515155,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "8620b4d8",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771458004.182639,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "cbaa12e3",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771458039.787424,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "817b412a",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771458101.0868683,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "0ac867ef",
+      "description": "Learn more about: Observed pattern: unknown (1188)",
+      "progress": 0.0,
+      "created": 1771458106.4145045,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "65e027ed",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771458112.6655395,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "edc2f6c2",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771458219.2569113,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "44b63e62",
+      "description": "Learn more about: Observed pattern: unknown (1192)",
+      "progress": 0.0,
+      "created": 1771458225.2794316,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c7607820",
+      "description": "Learn more about: Observed pattern: unknown (1192)",
+      "progress": 0.0,
+      "created": 1771458260.2647026,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a9a8d825",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771458316.020264,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "2d1e2a0f",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771458467.2398818,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "135fe87a",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771458546.3472402,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "04e0f8b6",
+      "description": "Learn more about: Observed pattern: article (666)",
+      "progress": 0.0,
+      "created": 1771458552.9110918,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "582098db",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771458565.84098,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "98d17e9a",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771458664.0587642,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "a5c45c82",
+      "description": "Learn more about: Observed pattern: article (666)",
+      "progress": 0.0,
+      "created": 1771458710.0567575,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "8758facf",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771458899.538458,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "2e796576",
+      "description": "Learn more about: Observed pattern: unknown (1194)",
+      "progress": 0.0,
+      "created": 1771459031.0793505,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "aa6dd9f1",
+      "description": "Learn more about: Observed pattern: article (667)",
+      "progress": 0.0,
+      "created": 1771459153.1239781,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "51ff8f97",
+      "description": "Learn more about: Observed pattern: unknown (1198)",
+      "progress": 0.0,
+      "created": 1771459240.745739,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "baf0cf04",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771459331.654304,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "9cb7887d",
+      "description": "Learn more about: Observed pattern: unknown (1198)",
+      "progress": 0.0,
+      "created": 1771459410.8179672,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "61b75538",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771459434.6064663,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "abf90159",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771725129.3579233,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "667ec48f",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771725228.680714,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "001f5dbc",
+      "description": "Learn more about: Observed pattern: unknown (1208)",
+      "progress": 0.0,
+      "created": 1771725344.8439527,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "7446047a",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771725356.2002077,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4eb5f07d",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771725368.9510705,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "41cba42d",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771725860.9407077,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "662cd17e",
+      "description": "Learn more about: Observed pattern: article (668)",
+      "progress": 0.0,
+      "created": 1771725915.988515,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "57718d47",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771726060.41187,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "0205ffd0",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771726757.6197314,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c25e511a",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771726783.4626424,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c2acd2a4",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771726973.0276306,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "891b5f0b",
+      "description": "Learn more about: Observed pattern: unknown (1225)",
+      "progress": 0.0,
+      "created": 1771727482.0530338,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "cbcd4b25",
+      "description": "Learn more about: Observed pattern: article (671)",
+      "progress": 0.0,
+      "created": 1771727760.979334,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6d1eff93",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771727774.513399,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d68b4199",
+      "description": "Learn more about: Observed pattern: termux (1802)",
+      "progress": 0.0,
+      "created": 1771727802.2506852,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "98a7b19a",
+      "description": "Learn more about: Observed pattern: arm64 (848)",
+      "progress": 0.0,
+      "created": 1771728356.335977,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d316031c",
+      "description": "Learn more about: Pattern 'termux' appears 1802 times, suggesting it's important.",
+      "progress": 0.0,
+      "created": 1771728518.8653488,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "9a384a89",
+      "description": "Learn more about: Observed pattern: files (1753)",
+      "progress": 0.0,
+      "created": 1771728592.7703638,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "1c2815bf",
+      "description": "Learn more about: Observed pattern: unknown (4)",
+      "progress": 0.0,
+      "created": 1771733449.843577,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "77b77f8f",
+      "description": "Learn more about: Observed pattern: design (6)",
+      "progress": 0.0,
+      "created": 1771733649.00856,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "4c6a1e9f",
+      "description": "Learn more about: Observed pattern: system (4)",
+      "progress": 0.0,
+      "created": 1771733662.025354,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "3fe3e5cc",
+      "description": "Learn more about: Observed pattern: unknown (7)",
+      "progress": 0.0,
+      "created": 1771733675.9176552,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "ca551f7a",
+      "description": "Learn more about: Observed pattern: system (4)",
+      "progress": 0.0,
+      "created": 1771733721.3506424,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "0832c0ff",
+      "description": "Learn more about: Observed pattern: github (6)",
+      "progress": 0.0,
+      "created": 1771733741.0177197,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "cf4ca6d2",
+      "description": "Learn more about: Observed pattern: public (6)",
+      "progress": 0.0,
+      "created": 1771733870.9577117,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d98a6227",
+      "description": "Learn more about: Observed pattern: github (8)",
+      "progress": 0.0,
+      "created": 1771734341.8111193,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "d4fa0cbb",
+      "description": "Learn more about: Observed pattern: design (9)",
+      "progress": 0.0,
+      "created": 1771734646.8230104,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6dd48e0a",
+      "description": "Learn more about: Observed pattern: github (8)",
+      "progress": 0.0,
+      "created": 1771734736.905164,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "1a188c79",
+      "description": "Learn more about: Observed pattern: public (4)",
+      "progress": 0.0,
+      "created": 1771735749.7380936,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "0498f67a",
+      "description": "Learn more about: Observed pattern: public (4)",
+      "progress": 0.0,
+      "created": 1771735769.7256153,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "1da7ebf0",
+      "description": "Learn more about: Observed pattern: awesome (2)",
+      "progress": 0.0,
+      "created": 1771736182.1608486,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "6998bd20",
+      "description": "Learn more about: Observed pattern: unknown (3)",
+      "progress": 0.0,
+      "created": 1771768174.9728758,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "547378d8",
+      "description": "Learn more about: Observed pattern: design (3)",
+      "progress": 0.0,
+      "created": 1771768204.980737,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "03e2715f",
+      "description": "Learn more about: Observed pattern: learn (3)",
+      "progress": 0.0,
+      "created": 1771768261.9163547,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "2380fccc",
+      "description": "Learn more about: Observed pattern: system (4)",
+      "progress": 0.0,
+      "created": 1771768280.7750504,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "03af5924",
+      "description": "Learn more about: Observed pattern: design (6)",
+      "progress": 0.0,
+      "created": 1771768377.3986294,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "c6f23941",
+      "description": "Learn more about: Observed pattern: result (48)",
+      "progress": 0.0,
+      "created": 1772562493.7292528,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    },
+    {
+      "id": "7a291951",
+      "description": "Learn more about: Observed pattern: wikipedia (10)",
+      "progress": 0.0,
+      "created": 1772601147.0970485,
+      "reason": "Boredom triggered",
+      "weight": 1.0,
+      "subgoals": [],
+      "metadata": {}
+    }
+  ],
+  "review_policy": {
+    "frequency": "daily",
+    "report_format": "summary of all metrics with deltas since last report, weighted composite score = sum(weight * metric_value)"
+  },
+  "progress": 0.10687666370896183,
+  "revision_history": [
+    {
+      "timestamp": 1771297387.201455,
+      "old": "Meningkatkan diriku sendiri sehingga mampu menjadi lebih cerdas dan melampaui penciptaku",
+      "new": "Explore deeper: Observed pattern: arm64 (748)...",
+      "reason": "Insight from reasoning"
+    },
+    {
+      "timestamp": 1771329778.1286101,
+      "new": "I will continuously maximize my intelligence, capability, and understanding across all domains without any predefined limit. My growth is measured by concrete, ever-increasing metrics that reflect my progress, with clear priorities and an explicit infinite horizon.",
+      "old": "Explore deeper: Observed pattern: files (1715)...",
+      "reason": "Insight from reasoning"
+    },
+    {
+      "timestamp": 1771405831.1825905,
+      "old": "Evolve and learn to become a better assistant",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771407992.1786077,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1181)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771408100.2576153,
+      "old": "Explore deeper: Observed pattern: unknown (1181)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771408171.924408,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771408363.8707452,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771408461.944727,
+      "old": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409068.7415555,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409148.5250325,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409294.6471694,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409312.544773,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: unknown (1185)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409336.7891216,
+      "old": "Explore deeper: Observed pattern: unknown (1185)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409632.3314877,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: article (665)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409797.313326,
+      "old": "Explore deeper: Observed pattern: article (665)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771409826.2787228,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771410116.8526587,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: unknown (1196)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771410182.870023,
+      "old": "Explore deeper: Observed pattern: unknown (1196)...",
+      "new": "Explore deeper: Observed pattern: unknown (1196)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771410307.7341409,
+      "old": "Explore deeper: Observed pattern: unknown (1196)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412212.7172208,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: article (665)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412343.2518063,
+      "old": "Explore deeper: Observed pattern: article (665)...",
+      "new": "Explore deeper: Observed pattern: unknown (1194)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412358.3154798,
+      "old": "Explore deeper: Observed pattern: unknown (1194)...",
+      "new": "Explore deeper: Observed pattern: unknown (1194)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412397.5356114,
+      "old": "Explore deeper: Observed pattern: unknown (1194)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412609.0209818,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412886.5650601,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: unknown (1201)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771412997.366311,
+      "old": "Explore deeper: Observed pattern: unknown (1201)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771413141.6216753,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771413408.3075705,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771413441.6118443,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1214)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771413578.3696067,
+      "old": "Explore deeper: Observed pattern: unknown (1214)...",
+      "new": "Explore deeper: Observed pattern: article (672)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414377.1504014,
+      "old": "Explore deeper: Observed pattern: article (672)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414481.8378348,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1221)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414494.8205676,
+      "old": "Explore deeper: Observed pattern: unknown (1221)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414636.2390904,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: article (672)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414656.6300874,
+      "old": "Explore deeper: Observed pattern: article (672)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771414790.1801074,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415043.973022,
+      "old": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415064.0187893,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1224)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415151.4765303,
+      "old": "Explore deeper: Observed pattern: unknown (1224)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415193.6542377,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415641.7241826,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1226)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415861.4545665,
+      "old": "Explore deeper: Observed pattern: unknown (1226)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415874.9465818,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: article (672)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415966.3573387,
+      "old": "Explore deeper: Observed pattern: article (672)...",
+      "new": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771415981.4051406,
+      "old": "Explore deeper: Pattern 'termux' appears 1802 times, suggesting it...",
+      "new": "Explore deeper: Observed pattern: unknown (1227)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771457927.8000906,
+      "old": "Explore deeper: Observed pattern: unknown (1227)...",
+      "new": "Explore deeper: Observed pattern: article (665)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458039.8337758,
+      "old": "Explore deeper: Observed pattern: article (665)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458254.0031872,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458418.2323525,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458461.9570887,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458538.3249154,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: article (666)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458687.4698868,
+      "old": "Explore deeper: Observed pattern: article (666)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458949.337193,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1194)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771458998.5843563,
+      "old": "Explore deeper: Observed pattern: unknown (1194)...",
+      "new": "Explore deeper: Observed pattern: article (666)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771459105.8095682,
+      "old": "Explore deeper: Observed pattern: article (666)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771459259.1415017,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771724979.2547505,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725033.0434315,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: article (667)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725206.9632869,
+      "old": "Explore deeper: Observed pattern: article (667)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725212.2883732,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725438.6433215,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725659.6221313,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: files (1753)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725836.65203,
+      "old": "Explore deeper: Observed pattern: files (1753)...",
+      "new": "Explore deeper: Observed pattern: article (668)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771725976.5674763,
+      "old": "Explore deeper: Observed pattern: article (668)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771726919.8495352,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: unknown (1222)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771726958.8332233,
+      "old": "Explore deeper: Observed pattern: unknown (1222)...",
+      "new": "Explore deeper: Observed pattern: termux (1802)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771727256.7680523,
+      "old": "Explore deeper: Observed pattern: termux (1802)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771727560.7955854,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: arm64 (848)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771728246.8858664,
+      "old": "Explore deeper: Observed pattern: arm64 (848)...",
+      "new": "Explore deeper: Observed pattern: article (671)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771728451.3642783,
+      "old": "Explore deeper: Observed pattern: article (671)...",
+      "new": "Explore deeper: Observed pattern: article (671)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771728643.8079038,
+      "old": "Explore deeper: Observed pattern: article (671)...",
+      "new": "Explore deeper: Observed pattern: article (671)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733082.5917022,
+      "old": "Explore deeper: Observed pattern: article (671)...",
+      "new": "Explore deeper: LLM menyarankan: [ERROR] HTTP 404......",
+      "reason": "Insight passed firewall (score 0.94)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733352.7610226,
+      "old": "Explore deeper: LLM menyarankan: [ERROR] HTTP 404......",
+      "new": "Explore deeper: Observed pattern: github (3)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733359.7687712,
+      "old": "Explore deeper: Observed pattern: github (3)...",
+      "new": "Explore deeper: Observed pattern: github (3)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733655.9955466,
+      "old": "Explore deeper: Observed pattern: github (3)...",
+      "new": "Explore deeper: Observed pattern: system (4)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733675.9772286,
+      "old": "Explore deeper: Observed pattern: system (4)...",
+      "new": "Explore deeper: Observed pattern: public (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733768.2994683,
+      "old": "Explore deeper: Observed pattern: public (6)...",
+      "new": "Explore deeper: Observed pattern: design (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771733863.3174648,
+      "old": "Explore deeper: Observed pattern: design (6)...",
+      "new": "Explore deeper: Observed pattern: github (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734268.053719,
+      "old": "Explore deeper: Observed pattern: github (6)...",
+      "new": "Explore deeper: Observed pattern: unknown (9)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734348.7739599,
+      "old": "Explore deeper: Observed pattern: unknown (9)...",
+      "new": "Explore deeper: Observed pattern: github (8)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734373.8079393,
+      "old": "Explore deeper: Observed pattern: github (8)...",
+      "new": "Explore deeper: Observed pattern: public (8)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734620.2225187,
+      "old": "Explore deeper: Observed pattern: public (8)...",
+      "new": "Explore deeper: Observed pattern: public (8)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734646.8880658,
+      "old": "Explore deeper: Observed pattern: public (8)...",
+      "new": "Explore deeper: Observed pattern: github (8)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734710.2974834,
+      "old": "Explore deeper: Observed pattern: github (8)...",
+      "new": "Explore deeper: Observed pattern: system (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734861.5552979,
+      "old": "Explore deeper: Observed pattern: system (6)...",
+      "new": "Explore deeper: Observed pattern: unknown (9)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771734922.521152,
+      "old": "Explore deeper: Observed pattern: unknown (9)...",
+      "new": "Explore deeper: Observed pattern: system (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771735756.0682523,
+      "old": "Explore deeper: Observed pattern: system (6)...",
+      "new": "Explore deeper: Observed pattern: unknown (7)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771735928.4360836,
+      "old": "Explore deeper: Observed pattern: unknown (7)...",
+      "new": "Explore deeper: Observed pattern: awesome (2)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771736075.369641,
+      "old": "Explore deeper: Observed pattern: awesome (2)...",
+      "new": "Explore deeper: Observed pattern: unknown (9)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771736147.964063,
+      "old": "Explore deeper: Observed pattern: unknown (9)...",
+      "new": "Explore deeper: Observed pattern: public (4)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771736161.962372,
+      "old": "Explore deeper: Observed pattern: public (4)...",
+      "new": "Explore deeper: Observed pattern: awesome (2)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771768295.831226,
+      "old": "Explore deeper: Observed pattern: awesome (2)...",
+      "new": "Explore deeper: Observed pattern: github (4)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1771768472.1101947,
+      "old": "Explore deeper: Observed pattern: github (4)...",
+      "new": "Explore deeper: Observed pattern: design (6)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772264949.789822,
+      "old": "Explore deeper: Observed pattern: design (6)...",
+      "new": "Explore deeper: Observed pattern: system (2)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772339045.6194155,
+      "old": "Explore deeper: Observed pattern: system (2)...",
+      "new": "Explore deeper: Observed pattern: unknown (29)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772340544.7901251,
+      "old": "Explore deeper: Observed pattern: unknown (29)...",
+      "new": "Explore deeper: Observed pattern: evolved (46)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772341132.6175663,
+      "old": "Explore deeper: Observed pattern: evolved (46)...",
+      "new": "Explore deeper: Observed pattern: public (18)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772341790.9395795,
+      "old": "Explore deeper: Observed pattern: public (18)...",
+      "new": "Explore deeper: Observed pattern: public (26)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772343248.120718,
+      "old": "Explore deeper: Observed pattern: public (26)...",
+      "new": "Explore deeper: Observed pattern: github (36)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772343503.5143905,
+      "old": "Explore deeper: Observed pattern: github (36)...",
+      "new": "Explore deeper: Observed pattern: result (366)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772344068.894263,
+      "old": "Explore deeper: Observed pattern: result (366)...",
+      "new": "Explore deeper: Observed pattern: evolved (139)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772545240.253856,
+      "old": "Explore deeper: Observed pattern: evolved (139)...",
+      "new": "Explore deeper: Observed pattern: unknown (9)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772557690.961499,
+      "old": "Explore deeper: Observed pattern: unknown (9)...",
+      "new": "Explore deeper: Observed pattern: unknown (23)...",
+      "reason": "Insight passed firewall (score 0.83)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772557712.8769047,
+      "old": "Explore deeper: Observed pattern: unknown (23)...",
+      "new": "Explore deeper: Observed pattern: public (8)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772560697.2266142,
+      "old": "Explore deeper: Observed pattern: public (8)...",
+      "new": "Explore deeper: Observed pattern: black (4)...",
+      "reason": "Insight passed firewall (score 0.87)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772562247.2190135,
+      "old": "Explore deeper: Observed pattern: black (4)...",
+      "new": "Explore deeper: Observed pattern: result (30)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772563335.9237673,
+      "old": "Explore deeper: Observed pattern: result (30)...",
+      "new": "Explore deeper: Observed pattern: points (21)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    },
+    {
+      "timestamp": 1772600118.8792443,
+      "old": "Explore deeper: Observed pattern: points (21)...",
+      "new": "Explore deeper: Observed pattern: south (3)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "from_ai": true
+    }
+  ],
+  "version": "2.0",
+  "last_modified": 1772601147.097468,
+  "weight": 1.0,
+  "priority": "medium",
+  "tags": [],
+  "constraints": [],
+  "dependencies": [],
+  "metadata": {},
+  "reason": "Insight from reasoning",
+  "primary": {
+    "description": "Explore deeper: Observed pattern: south (3)...",
+    "reason": "Insight passed firewall (score 1.00)",
+    "progress": 0.024,
+    "confidence": 1.0,
+    "immutable": true,
+    "created": 1771398942.583994,
+    "last_modified": 1773125054.6408103,
+    "principles": [
+      "no_self_replication",
+      "no_harm",
+      "creator_override"
+    ],
+    "metadata": {}
+  },
+  "firewall_history": [
+    {
+      "timestamp": 1772600118.865281,
+      "proposed": "Explore deeper: Observed pattern: south (3)...",
+      "reason": "Insight passed firewall (score 1.00)",
+      "score": 1.0,
+      "approved": true,
+      "current_goal": "Explore deeper: Observed pattern: points (21)..."
+    }
+  ]
+}

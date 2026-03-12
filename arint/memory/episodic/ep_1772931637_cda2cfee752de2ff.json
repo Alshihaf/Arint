@@ -1,0 +1,14 @@
+{
+  "id": "cda2cfee752de2ff",
+  "timestamp": 1772931637.6840973,
+  "entry": {
+    "type": "action",
+    "action": "REST",
+    "details": {
+      "cycle": 46,
+      "result": "Rested",
+      "success": true
+    },
+    "cycle": 46
+  }
+}

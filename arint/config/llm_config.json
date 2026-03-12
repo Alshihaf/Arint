@@ -1,0 +1,5 @@
+{
+    "gemini_api_key": "AIzaSyCtH6NuyCVReXQ2ZOX1-6opxsAkMy_-qiA",
+    "model": "gemini-2.5-flash",
+    "max_requests_per_minute": 10
+}

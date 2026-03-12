@@ -1,0 +1,38 @@
+{
+  "id": "823f64925d62b54e",
+  "content": "Hacker News Hacker News new past comments ask show jobs submit login 1. How I use Claude Code: Separation of planning and execution boristane.com 87 points by vinhnx 1 hour ago hide 41 comments 2. Are compilers deterministic? onepatchdown.net 30 points by fragmede 1 hour ago hide 20 comments 3. Show HN: Llama 3.1 70B on a single RTX 3090 via NVMe-to-GPU bypassing the CPU github.com xaskasdf 97 points by xaskasdf 5 hours ago hide 25 comments 4. Parse, Don't Validate and Type-Driven Design in Rust harudagondi.space 125 points by todsacerdoti 6 hours ago hide 37 comments 5. Evidence of the bouba-kiki effect in naïve baby chicks science.org 66 points by suddenlybananas 4 hours ago hide 20 comments 6. How far back in time can you understand English? deadlanguagesociety.com 358 points by spzb 12 hours ago hide 204 comments 7. zclaw: personal AI assistant in under 888 KB, running on an ESP32 github.com tnm 96 points by tosh 6 hours ago hide 51 comments 8. Who's liable when your AI agent burns down production? reading.sh 21 points by zenoware 2 hours ago hide 3 comments 9. Forward propagation of errors through time nicolaszucchet.github.io 6 points by iNic 2 hours ago hide discuss 10. EDuke32 Duke Nukem 3D Open-Source eduke32.com 150 points by reconnecting 5 hours ago hide 56 comments 11. CXMT has been offering DDR4 chips at about half the prevailing market rate koreaherald.com 155 points by phront 11 hours ago hide 129 comments 12. Claws are now a new layer on top of LLM agents twitter.com karpathy 195 points by Cyphase 13 hours ago hide 646 comments 13. Personal Statement of a CIA Analyst antipolygraph.org 165 points by grubbs 8 hours ago hide 89 comments 14. Finding forall-exists Hyperbugs using Symbolic Execution acm.org 16 points by todsacerdoti 3 hours ago hide discuss 15. Canvas_ity: A tiny, single-header -like 2D rasterizer for C github.com a-e-k 61 points by PaulHoule 7 hours ago hide 23 comments 16. Toyota Mirai hydrogen car depreciation: 65 value loss in a year carbuzz.com 95 points by iancmceachern 7 hours ago hide 226 comments 17. What not to write on your security clearance form 1988 milk.com 381 points by wizardforhire 8 hours ago hide 165 comments 18. I verified my LinkedIn identity. Here's what I handed over thelocalstack.eu 1177 points by ColinWright 18 hours ago hide 409 comments 19. Acme Weather acmeweather.com 194 points by cryptoz 18 hours ago hide 122 comments 20. Inputlag.science Repository of knowledge about input lag in gaming inputlag.science 62 points by akyuu 6 hours ago hide 12 comments 21. Online Pebble Development repebble.com 20 points by teekert 5 hours ago hide 6 comments 22. Be wary of Bluesky kevinak.se 245 points by kevinak 17 hours ago hide 173 comments 23. Permacomputing xxiivv.com 99 points by tosh 9 hours ago hide 23 comments 24. I Don't Like Magic adactio.com 110 points by edent 6 hours ago hide 95 comments 25. Uncovering insiders and alpha on Polymarket with AI twitter.com peterjliu 129 points by somerandomness 18 hours ago hide 120 comments 26. Keep Android Open f-droid.org 1989 points by LorenDB 1 day ago hide 690 comments 27. A16z partner says that the theory that we ll vibe code everything is wrong aol.com 81 points by paulpauper 15 hours ago hide 110 comments 28. Show HN: Iron-Wolf Wolfenstein 3D source port in Rust github.com ragnaroek 58 points by ragnaroekX 10 hours ago hide 20 comments 29. AI uBlock Blacklist github.com alvi-se 222 points by rdmuser 17 hours ago hide 99 comments 30. Cloudflare outage on February 20, 2026 cloudflare.com 156 points by nomaxx117 6 hours ago hide 107 comments More Guidelines FAQ Lists API Security Legal Apply to YC Contact Search:",
+  "summary": "Acme Weather acmeweather.com 194 points by cryptoz 18 hours ago hide 122 comments 20. Online Pebble Development repebble.com 20 points by teekert 5 hours ago hide 6 comments 22. Permacomputing xxiivv.com 99 points by tosh 9 hours ago hide 23 comments 24. I Don't Like Magic adactio.com 110 points by edent 6 hours ago hide 95 comments 25. AI uBlock Blacklist github.com alvi-se 222 points by rdmuser 17 hours ago hide 99 comments 30.",
+  "key_points": [
+    "Acme Weather acmeweather.com 194 points by cryptoz 18 hours ago hide 122 comments 20.",
+    "Online Pebble Development repebble.com 20 points by teekert 5 hours ago hide 6 comments 22.",
+    "Permacomputing xxiivv.com 99 points by tosh 9 hours ago hide 23 comments 24.",
+    "I Don't Like Magic adactio.com 110 points by edent 6 hours ago hide 95 comments 25.",
+    "AI uBlock Blacklist github.com alvi-se 222 points by rdmuser 17 hours ago hide 99 comments 30."
+  ],
+  "keywords": [
+    "points",
+    "ago",
+    "hide",
+    "comments",
+    "hours",
+    "com",
+    "github",
+    "org",
+    "show",
+    "science",
+    "hacker",
+    "news",
+    "new",
+    "code",
+    "execution"
+  ],
+  "source": "https://news.ycombinator.com",
+  "length": 3671,
+  "quality": 0.6886762822366553,
+  "type": "article",
+  "hash": "823f64925d62b54e91dbd7262a38bf55974552d77d6ab91f9390048c1d157213",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-02-22T10:01:43.749703",
+  "metadata": {}
+}

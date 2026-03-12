@@ -1,0 +1,9 @@
+{
+  "id": "9f1c6803c74e7685",
+  "timestamp": 1772562551.98138,
+  "entry": {
+    "type": "explore_fs",
+    "mode": "find_by_name",
+    "result": "Explored filesystem with mode find_by_name"
+  }
+}

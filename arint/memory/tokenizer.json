@@ -1,0 +1,1 @@
+{"word2idx": {"<PAD>": 0, "<UNK>": 1, "<BOS>": 2, "<EOS>": 3}, "idx2word": {"0": "<PAD>", "1": "<UNK>", "2": "<BOS>", "3": "<EOS>"}, "vocab_size": 2000}

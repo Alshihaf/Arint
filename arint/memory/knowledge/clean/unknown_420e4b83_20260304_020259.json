@@ -1,0 +1,35 @@
+{
+  "id": "420e4b83f51ce710",
+  "content": "The self-attention mechanism allows a Transformer model to weigh the significance of different words in a sequence relative to a specific target word. Unlike previous recurrent architectures that processed data linearly, self-attention enables the model to capture long-range dependencies and contextual relationships simultaneously across the entire input, significantly improving the representation of complex linguistic structures.",
+  "summary": "The self-attention mechanism allows a Transformer model to weigh the significance of different words in a sequence relative to a specific target word. Unlike previous recurrent architectures that processed data linearly, self-attention enables the model to capture long-range dependencies and contextual relationships simultaneously across the entire input, significantly improving the representation of complex linguistic structures.",
+  "key_points": [
+    "The self-attention mechanism allows a Transformer model to weigh the significance of different words in a sequence relative to a specific target word.",
+    "Unlike previous recurrent architectures that processed data linearly, self-attention enables the model to capture long-range dependencies and contextual relationships simultaneously across the entire input, significantly improving the representation of complex linguistic structures."
+  ],
+  "keywords": [
+    "self",
+    "attention",
+    "model",
+    "mechanism",
+    "allows",
+    "transformer",
+    "weigh",
+    "significance",
+    "different",
+    "words",
+    "sequence",
+    "relative",
+    "specific",
+    "target",
+    "word"
+  ],
+  "source": "external-api",
+  "length": 434,
+  "quality": 0.852869710934227,
+  "type": "unknown",
+  "hash": "420e4b83f51ce710202b6cb80efe0e7acfa6890f304b2ae342183d1e865bce17",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-03-04T02:02:59.037641",
+  "metadata": {}
+}

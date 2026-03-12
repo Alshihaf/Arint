@@ -1,0 +1,36 @@
+{
+  "id": "f57704366a58daee",
+  "content": "Quantum entanglement is a phenomenon where particles share a single quantum state. While a measurement on one particle instantaneously determines the state of the other regardless of distance, this does not violate relativity. According to the no-communication theorem, these correlations cannot be used to transmit classical information or messages faster than the speed of light, as the individual measurement results are inherently random.",
+  "summary": "Quantum entanglement is a phenomenon where particles share a single quantum state. While a measurement on one particle instantaneously determines the state of the other regardless of distance, this does not violate relativity. According to the no-communication theorem, these correlations cannot be used to transmit classical information or messages faster than the speed of light, as the individual measurement results are inherently random.",
+  "key_points": [
+    "Quantum entanglement is a phenomenon where particles share a single quantum state.",
+    "While a measurement on one particle instantaneously determines the state of the other regardless of distance, this does not violate relativity.",
+    "According to the no-communication theorem, these correlations cannot be used to transmit classical information or messages faster than the speed of light, as the individual measurement results are inherently random."
+  ],
+  "keywords": [
+    "quantum",
+    "state",
+    "measurement",
+    "entanglement",
+    "phenomenon",
+    "particles",
+    "share",
+    "single",
+    "one",
+    "particle",
+    "instantaneously",
+    "determines",
+    "regardless",
+    "distance",
+    "violate"
+  ],
+  "source": "external-api",
+  "length": 442,
+  "quality": 0.8581914817208934,
+  "type": "unknown",
+  "hash": "f57704366a58daee39d7fdf6a1ca7c6a297801aafdbcdebae591dd49698d8c73",
+  "language": "en",
+  "original_language": "en",
+  "timestamp": "2026-03-04T02:01:10.197920",
+  "metadata": {}
+}

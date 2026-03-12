@@ -1,0 +1,67 @@
+{
+  "id": "1f44cf42170ff67f",
+  "goal_id": "primary",
+  "goal_description": "Explore deeper: Observed pattern: article (666)...",
+  "steps": [
+    {
+      "action": "EXPLORE",
+      "params": {},
+      "expected_outcome": "Dapatkan informasi baru",
+      "completed": true,
+      "result": {
+        "action": "EXPLORE",
+        "cycle": 10858,
+        "timestamp": 1771458625.957375,
+        "needs": {
+          "boredom": 100,
+          "fatigue": 0,
+          "hunger_data": 100,
+          "messiness": 19
+        },
+        "new_data_count": 5
+      },
+      "timestamp": 1771458625.9574282
+    },
+    {
+      "action": "REASON",
+      "params": {},
+      "expected_outcome": "Hasilkan insight",
+      "completed": true,
+      "result": {
+        "action": "REASON",
+        "cycle": 10883,
+        "timestamp": 1771458797.8316119,
+        "needs": {
+          "boredom": 70,
+          "fatigue": 0,
+          "hunger_data": 80,
+          "messiness": 100
+        }
+      },
+      "timestamp": 1771458797.8316398
+    },
+    {
+      "action": "ORGANIZE",
+      "params": {},
+      "expected_outcome": "Simpan pengetahuan",
+      "completed": true,
+      "result": {
+        "action": "ORGANIZE",
+        "cycle": 10884,
+        "timestamp": 1771458800.59073,
+        "needs": {
+          "boredom": 83,
+          "fatigue": 0,
+          "hunger_data": 87,
+          "messiness": 0
+        }
+      },
+      "timestamp": 1771458800.590751
+    }
+  ],
+  "created": 1771458614.401261,
+  "last_updated": 1771458800.5907524,
+  "status": "completed",
+  "parent_plan_id": null,
+  "metadata": {}
+}
