@@ -108,6 +108,7 @@ class SilentWatcherSuper:
 
         from core.chain_of_thought import ChainOfThought
         from core.imagination import Imagination
+        from core.flock_of_thought import FlockOfThought
         self.cot = ChainOfThought(
             memory_router=None,
             max_depth=4,
@@ -119,6 +120,9 @@ class SilentWatcherSuper:
         self.imagination = Imagination(self.dreamer)
         self.cot_executive = CoTExecutive(self.cot, self)
         self.log("CoT-based executive initialized")
+
+        self.fot = FlockOfThought(self)
+        self.log("Flock of Thought (FoT) initialized — semua modul terhubung")
 
         self.cycle = 0
         self.keywords = ["ai", "autonomy", "hacking", "logic", "optimization", "system", "llm",

@@ -138,8 +138,10 @@ class Reflection:
             except Exception as e:
                 logger.error(f"Gagal menyimpan refleksi ke memory_router: {e}. Fallback ke file.")
 
-        log_path = "ai_core/memory/consciousness/current.log"
+        import os
+        log_path = "memory/consciousness/current.log"
         try:
+            os.makedirs(os.path.dirname(log_path), exist_ok=True)
             with open(log_path, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(entry, ensure_ascii=False) + "\n")
         except Exception as e:

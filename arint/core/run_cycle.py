@@ -13,8 +13,23 @@ from .cot_executive import CoTExecutive
 def run_cycle(self):
     self.cycle += 1
     for k in ["hunger_data", "boredom", "messiness", "fatigue"]:
-        self.needs[k] += random.randint(1, 5)  # ← Slower increase
+        self.needs[k] += random.randint(1, 5)
         self.needs[k] = max(0, min(100, self.needs[k]))
+
+    actions_list = [
+        "EXPLORE", "EVOLVE", "ORGANIZE", "REST", "WRITE_CODE",
+        "EXPLORE_FS", "EXPLORE_GITHUB", "EXPLORE_HF", "REASON", "GENERATE_BINARY_OUTPUT"
+    ]
+
+    # ── FoT Phase 1: Pre-Action ──────────────────────────────────
+    # Semua modul saling memberi sinyal sebelum action dipilih.
+    # FoT mengumpulkan: Kesadaran + Planner + LTM + CoT + Imagination
+    fot_signals = {}
+    if hasattr(self, 'fot'):
+        try:
+            fot_signals = self.fot.pre_action(actions_list)
+        except Exception as e:
+            self.log(f"[FoT] pre_action error: {e}")
 
     plan_action, plan_context = self._get_plan_action()
     if plan_action:
@@ -22,58 +37,57 @@ def run_cycle(self):
         self.current_plan_context = plan_context
         self.log(f"Following plan: {action}")
     else:
-        actions_list = [
-            "EXPLORE", "EVOLVE", "ORGANIZE", "REST", "WRITE_CODE",
-            "EXPLORE_FS", "EXPLORE_GITHUB", "EXPLORE_HF", "REASON", "GENERATE_BINARY_OUTPUT"
-        ]
         action_scores = sws_logic.foresight_simulation(self, actions_list)
 
-        self.log(f"[DEBUG] action_scores type: {type(action_scores)}")
-        self.log(f"[DEBUG] action_scores length: {len(action_scores) if action_scores else 'None'}")
-        if action_scores:
-            self.log(f"[DEBUG] First 3 scores: {action_scores[:3]}")
-        else:
-            self.log(f"[DEBUG] action_scores is EMPTY or None!")
+        # Gabungkan FoT signals ke dalam scoring
+        if fot_signals:
+            cot_rankings = fot_signals.get("cot_rankings", [])
+            imagination_signals = fot_signals.get("imagination_signals", {})
+            ltm_signal = fot_signals.get("ltm_signal", {})
+            plan_signal = fot_signals.get("plan_signal", {})
 
-        self.log(f"[DEBUG] Has cot_executive? {hasattr(self, 'cot_executive')}")
-        if hasattr(self, 'cot_executive'):
-            self.log(f"[DEBUG] cot_executive type: {type(self.cot_executive)}")
-            self.log(f"[DEBUG] Has evaluate_action method? {hasattr(self.cot_executive, 'evaluate_action')}")
-
+            cot_rank_map = {a: i for i, (a, _) in enumerate(cot_rankings)}
+            boosted_scores = []
+            for act, score in action_scores:
+                bonus = 0.0
+                # CoT ranking bonus: semakin tinggi di ranking CoT, semakin besar bonus
+                rank = cot_rank_map.get(act, len(actions_list))
+                bonus += max(0.0, (len(actions_list) - rank) / len(actions_list)) * 0.3
+                # Imagination bonus: jika avg_impact positif
+                img = imagination_signals.get(act, {})
+                avg_impact = img.get("avg_impact", 0.0)
+                if avg_impact > 0:
+                    bonus += avg_impact * 0.2
+                elif avg_impact < -0.3:
+                    bonus -= 0.15
+                # Plan alignment bonus
+                if plan_signal.get("has_plan") and plan_signal.get("next_action") == act:
+                    bonus += 0.35
+                boosted_scores.append((act, score + bonus))
+            boosted_scores.sort(key=lambda x: x[1], reverse=True)
+            action_scores = boosted_scores
 
         chosen_action = None
-        self.log("[DEBUG] Starting action evaluation loop")
-
         for act, score in action_scores:
-            self.log(f"[DEBUG] Evaluating action: {act}")
-    
             try:
-                self.log(f"[DEBUG] Calling cot_executive.evaluate_action for {act}")
                 approved, reason, eval_confidence = self.cot_executive.evaluate_action(
-                    act, 
-                    self.needs, 
+                    act,
+                    self.needs,
                     {"cycle": self.cycle}
                 )
-                self.log(f"[DEBUG] Result for {act}: approved={approved}, confidence={eval_confidence}")
-        
                 if approved:
-                    boosted_score = score * (0.7 + 0.3 * eval_confidence)
                     chosen_action = act
-                    chosen_eval_confidence = eval_confidence
-                    self.log(f"[DEBUG] Action {act} APPROVED, breaking loop")
+                    self.log(f"Action dipilih: {act} (score={score:.2f}, conf={eval_confidence:.2f})")
                     break
                 else:
-                    self.log(f"[DEBUG] Action {act} REJECTED by CoT")
-    
+                    self.log(f"Action {act} ditolak CoT: {reason[:60]}")
             except Exception as e:
-                self.log(f"[ERROR] Exception evaluating {act}: {e}")
-                self.log(f"[ERROR] Traceback: {traceback.format_exc()}")
+                self.log(f"[ERROR] Evaluasi {act}: {e}")
 
         if chosen_action is None:
             action = "REST"
-            self.log("All action blocked by executive, so i chose REST")
+            self.log("Semua action ditolak — default ke REST")
         else:
-            self.log(f"[DEBUG] Final chosen action: {chosen_action}")
             action = chosen_action
 
     self.log(f"Decided Action: {action} | Needs: {self.needs}")
@@ -196,10 +210,9 @@ def run_cycle(self):
     else:
         reward = -0.5
 
-    ancaman = True
-    if action in ["EVOLVE", "EXPLORE_FS", "WRITE_CODE", "EXPLORE_GITHUB", "EXPLORE_HF"]:
-        if result and "Failed" in result:
-            ancaman = True
+    success = reward > 0
+
+    ancaman = action in ["EVOLVE", "EXPLORE_FS", "WRITE_CODE", "EXPLORE_GITHUB", "EXPLORE_HF"] and not success
 
     if hasattr(self, 'intention'):
         action_names = ["EXPLORE", "EVOLVE", "ORGANIZE", "REST", "WRITE_CODE",
@@ -211,15 +224,23 @@ def run_cycle(self):
         except ValueError:
             pass
 
-    stimulus = self._get_stimulus_vector()
-    self.kesadaran.alami_stimulus(stimulus, reward_aktual=reward, ancaman=ancaman)
-
-    try:
-        context = self._get_decision_context()
-        success = reward > 0
-        self.ltm.update_action_success(action, context, success)
-    except Exception as e:
-        self.log(f"[ERROR] LTM update failed: {e}")
+    # ── FoT Phase 2: Post-Action ─────────────────────────────────
+    # Setelah action selesai, FoT menyebarkan hasilnya ke semua modul:
+    # Reflection → LTM → Kesadaran → CoT → Planner → GoalManager
+    if hasattr(self, 'fot'):
+        try:
+            self.fot.post_action(action, result, reward, success)
+        except Exception as e:
+            self.log(f"[FoT] post_action error: {e}")
+    else:
+        # Fallback: update kesadaran dan LTM secara langsung
+        stimulus = self._get_stimulus_vector()
+        self.kesadaran.alami_stimulus(stimulus, reward_aktual=reward, ancaman=ancaman)
+        try:
+            context = self._get_decision_context()
+            self.ltm.update_action_success(action, context, success)
+        except Exception as e:
+            self.log(f"[ERROR] LTM update failed: {e}")
     
     if self.cycle % 500 == 0:
         recent = self.audit.logbook[-200:]
@@ -314,3 +335,15 @@ def run_cycle(self):
 
     if self.cycle % 50 == 0:
         self._ltm_debug()
+
+    # ── FoT Phase 3: Meta-Sync ───────────────────────────────────
+    # Setiap 10 siklus, FoT melakukan sinkronisasi mendalam antar modul:
+    # BrainCore patterns → GoalManager subgoals
+    # AuditLoop wisdom → CoT confidence calibration
+    # Kesadaran metacognisi → Planner template bias
+    # LTM → BrainCore enrichment
+    if hasattr(self, 'fot') and self.cycle % 10 == 0:
+        try:
+            self.fot.meta_sync()
+        except Exception as e:
+            self.log(f"[FoT] meta_sync error: {e}")
