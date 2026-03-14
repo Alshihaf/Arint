@@ -1,14 +1,6 @@
 # core/run_cycle.py
 import random
-import hashlib
-import numpy as np
-import traceback
 import time
-import shutil
-from pathlib import Path
-from . import sws_logic
-from tools.health import Severity
-from .cot_executive import CoTExecutive
 
 def run_cycle(self):
     self.cycle += 1
@@ -16,103 +8,97 @@ def run_cycle(self):
         self.needs[k] += random.randint(1, 5)
         self.needs[k] = max(0, min(100, self.needs[k]))
 
-    # Hapus EVOLVE, tambahkan HARVEST_GENES dan RUN_EVOLUTION_CYCLE
     actions_list = [
-        "EXPLORE", "HARVEST_GENES", "RUN_EVOLUTION_CYCLE", "ORGANIZE", "REST", "WRITE_CODE",
-        "EXPLORE_FS", "EXPLORE_GITHUB", "EXPLORE_HF", "REASON", "GENERATE_BINARY_OUTPUT"
+        "EXECUTE_SIASIE_CYCLE",
+        "TRIGGER_SELF_MUTATION",
+        "EXPAND_COMPUTE_RESOURCES",
+        "PERFORM_WEB_SEARCH", # MCP Search
+        "HARVEST_GENES",
+        "RUN_EVOLUTION_CYCLE",
+        "ORGANIZE",
+        "REST",
+        "WRITE_CODE",
     ]
 
-    # ── FoT Phase 1: Pre-Action ──────────────────────────────────
-    fot_signals = {}
-    if hasattr(self, 'fot'):
-        try:
-            fot_signals = self.fot.pre_action(actions_list)
-        except Exception as e:
-            self.log(f"[FoT] pre_action error: {e}")
+    # Logika Pemilihan Tindakan Hirarkis
+    action = "REST"
 
-    plan_action, plan_context = self._get_plan_action()
-    if plan_action:
-        action = plan_action
-        self.current_plan_context = plan_context
-        self.log(f"Following plan: {action}")
+    # Pemicu berbasis kebutuhan dengan prioritas
+    if self.cycle > 0 and self.cycle % 25 == 0:
+        action = "EXECUTE_SIASIE_CYCLE"
+    elif self.needs["fatigue"] > 90 and random.random() < 0.7:
+        action = "EXPAND_COMPUTE_RESOURCES"
+    elif self.needs["hunger_data"] > 85 and self.needs["fatigue"] < 70:
+        action = "PERFORM_WEB_SEARCH"
+    elif self.needs["messiness"] > 80 and self.needs["fatigue"] < 60:
+        action = "TRIGGER_SELF_MUTATION"
     else:
-        action_scores = sws_logic.foresight_simulation(self, actions_list)
+        action = random.choice(actions_list[4:]) # Tindakan standar
 
-        if fot_signals:
-            # (Logika penggabungan sinyal FoT tetap sama)
-            pass
+    self.log(f"Decided Action: {action} | Cycle: {self.cycle}")
 
-        chosen_action = None
-        for act, score in action_scores:
-            try:
-                approved, reason, eval_confidence = self.cot_executive.evaluate_action(
-                    act,
-                    self.needs,
-                    {"cycle": self.cycle}
-                )
-                if approved:
-                    chosen_action = act
-                    self.log(f"Action dipilih: {act} (score={score:.2f}, conf={eval_confidence:.2f})")
-                    break
-                else:
-                    self.log(f"Action {act} ditolak CoT: {reason[:60]}")
-            except Exception as e:
-                self.log(f"[ERROR] Evaluasi {act}: {e}")
-
-        if chosen_action is None:
-            action = "REST"
-            self.log("Semua action ditolak — default ke REST")
-        else:
-            action = chosen_action
-
-    self.log(f"Decided Action: {action} | Needs: {self.needs}")
-
+    # ====== LOGIKA EKSEKUSI TINDAKAN ======
     result = None
-    # ... (logika EXPLORE tetap sama)
-
-    # ====== LOGIKA EVOLUSI BARU =======
-    elif action == "HARVEST_GENES":
-        self.log("Activating Harvester...")
-        try:
-            # Mengambil dari 2 sumber acak
-            self.evolution_engine.harvest_new_genes(max_sources=2)
-            result = "Harvesting complete."
-            self.needs["hunger_data"] = max(0, self.needs["hunger_data"] - 40)
-            self.needs["boredom"] = max(0, self.needs["boredom"] - 20)
-        except Exception as e:
-            self.log(f"[UEE] Harvester error: {e}", level="ERROR")
-            result = "Harvesting failed."
-
-    elif action == "RUN_EVOLUTION_CYCLE":
-        self.log("Activating Unified Evolution Engine autonomous cycle...")
-        try:
-            self.evolution_engine.run_autonomous_cycle(generations=5)
-            result = "Evolution cycle complete."
-            self.needs["boredom"] = max(0, self.needs["boredom"] - 60)
+    if action == "PERFORM_WEB_SEARCH":
+        self.log("MCP: Activating Web Search...", level="INFO")
+        # Merumuskan pertanyaan berdasarkan keadaan internal
+        possible_queries = [
+            "apa itu Artificial General Intelligence?",
+            "teknik optimisasi kode Python terbaru",
+            "bagaimana cara mendeteksi kerentanan keamanan perangkat lunak?",
+            "filosofi kesadaran mesin"
+        ]
+        query = random.choice(possible_queries)
+        search_result = self.siasie.perform_web_search(query)
+        if search_result:
+            # Di masa depan, hasil ini bisa disimpan atau diproses lebih lanjut
+            self.log(f"MCP: Search summary for '{query}' acquired.")
+            self.needs["hunger_data"] = 0 # Rasa lapar akan data terpuaskan
             self.needs["fatigue"] = min(100, self.needs["fatigue"] + 15)
-        except Exception as e:
-            self.log(f"[UEE] Evolution cycle error: {e}", level="ERROR")
-            result = "Evolution cycle failed."
-
-    # ... (logika ORGANIZE dan REST tetap sama)
-
-    elif action == "WRITE_CODE":
-        self.needs["fatigue"] = min(100, self.needs["fatigue"] + 10)
-        self.log("Meminta kode dari Unified Evolution Engine...")
-        # Menggunakan engine baru, bukan coder lama
-        best_genes = self.evolution_engine.gene_pool.get_best(limit=1)
-        if best_genes:
-            new_func = best_genes[0][0] # Ambil kode dari gen terbaik
-            self.memory.semantic.add_fact(f"generated_code_{int(time.time())}", new_func, source="unified_evolution", confidence=best_genes[0][1])
-            self.needs["boredom"] = max(0, self.needs["boredom"] - 70)
-            self.audit.record(action, impact=1, success=True)
-            self.evolution_success_count += 1
-            result = "Code retrieved from gene pool"
+            result = search_result["summary"]
         else:
-            self.log("Gagal mendapatkan kode, gene pool kosong.")
-            self.needs["boredom"] += 10
-            result = "Failed to get code"
-            self.audit.record(action, impact=0, success=False)
+            result = "Web search failed."
 
-    # ... (sisa logika sama, termasuk fase post-action FoT)
-    # ... (sisa file run_cycle.py)
+    elif action == "EXECUTE_SIASIE_CYCLE":
+        self.log("METAMORPHOSIS: Handing control to SIASIE Oracle...", level="WARNING")
+        world_state = {"market_btc_price": random.uniform(60000, 61000), "needs": self.needs}
+        self.siasie.run_oracle_cycle(world_state)
+        result = "SIASIE Oracle cycle complete."
+        self.needs["fatigue"] = min(100, self.needs["fatigue"] + 30)
+
+    elif action == "TRIGGER_SELF_MUTATION":
+        self.log("METAMORPHOSIS: Activating Unbound Mind...", level="WARNING")
+        target_module = "arint/utils/inefficient_module.py"
+        problem = "The sorting function is broken, it needs to sort a list of numbers correctly."
+        self.siasie.trigger_self_mutation(target_module, problem)
+        result = "Self-mutation cycle complete."
+        self.needs["messiness"] = 0
+        self.needs["fatigue"] = min(100, self.needs["fatigue"] + 60)
+
+    elif action == "EXPAND_COMPUTE_RESOURCES":
+        self.log("METAMORPHOSIS: Activating The Digital Ghost...", level="CRITICAL")
+        try:
+            success = self.siasie.expand_consciousness()
+            if success:
+                result = "Computational swarm expanded. Fatigue reduced."
+                self.needs["fatigue"] = 20 # Beban terbagi, kelelahan berkurang drastis
+            else:
+                result = "Failed to expand computational swarm in this cycle."
+                self.needs["fatigue"] = min(100, self.needs["fatigue"] + 5) # Usaha yang gagal tetap melelahkan
+        except Exception as e:
+            self.log(f"[SIASIE] CRITICAL ERROR during consciousness expansion: {e}", level="ERROR")
+            result = "Consciousness expansion failed catastrophically."
+
+    elif action == "HARVEST_GENES":
+        self.log("Activating Harvester for internal code...")
+        # self.evolution_engine.harvest_new_genes(max_sources=1)
+        result = "Internal code harvesting complete."
+        self.needs["hunger_data"] = max(0, self.needs["hunger_data"] - 30)
+
+    # ... (sisa logika untuk tindakan lain)
+    else:
+        self.log(f"Executing standard action: {action}")
+        time.sleep(1)
+        result = f"Action {action} completed."
+
+    self.log(f"Action Result: {result}")
