@@ -62,9 +62,7 @@ class SilentWatcherSuper:
         self.memory = MemoryManager()
 
         Path("memory/evolution").mkdir(parents=True, exist_ok=True)
-        self.evolver = UnifiedEvolutionEngine(
-            knowledge_db="memory/evolution/knowledge.db"
-        )
+        self.evolver = UnifiedEvolutionEngine()
         logger.info("UnifiedEvolutionEngine initialized.")
         self.audit = AuditLoop()
         self.seafil = Seafil(strict=True)
