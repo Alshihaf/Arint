@@ -1,226 +1,176 @@
-
 # core/neural_network.py
-# Implementasi Jaringan Saraf modular dari nol dengan backpropagation.
-import math
-import random
-import json
+# Berisi implementasi komponen Jaringan Saraf berbasis NumPy, termasuk arsitektur Transformer.
 
-# --- Fungsi Aktivasi dan Turunannya ---
+import numpy as np
 
-def sigmoid(x):
-    """Fungsi aktivasi sigmoid."""
-    # Menambahkan pengecekan untuk menghindari overflow
-    if x < -700:
-        return 0.0
-    return 1 / (1 + math.exp(-x))
-
-def sigmoid_derivative(x):
-    """Turunan dari fungsi sigmoid."""
-    s = sigmoid(x)
-    return s * (1 - s)
-
-def relu(x):
-    """Fungsi aktivasi Rectified Linear Unit (ReLU)."""
-    return max(0, x)
-
-def relu_derivative(x):
-    """Turunan dari fungsi ReLU."""
-    return 1 if x > 0 else 0
-
-def tanh(x):
-    """Fungsi aktivasi hyperbolic tangent."""
-    return math.tanh(x)
-
-def tanh_derivative(x):
-    """Turunan dari fungsi tanh."""
-    return 1 - math.tanh(x)**2
-
-# --- Fungsi Loss ---
-
-def mse_loss(predicted, actual):
-    """Mean Squared Error loss."""
-    return sum([(p - a)**2 for p, a in zip(predicted, actual)]) / len(predicted)
-
-def mse_loss_derivative(predicted, actual):
-    """Turunan dari Mean Squared Error loss."""
-    return [2 * (p - a) for p, a in zip(predicted, actual)]
-
-
-class DenseLayer:
-    """Lapisan Dense (fully-connected) yang mampu melakukan forward dan backward pass."""
-    def __init__(self, input_size, output_size, activation='''relu'''):
-        self.input_size = input_size
-        self.output_size = output_size
-        self.weights = [[random.uniform(-0.5, 0.5) for _ in range(input_size)] for _ in range(output_size)]
-        self.biases = [random.uniform(-0.5, 0.5) for _ in range(output_size)]
-        self.activation_str = activation.lower()
-
-        # Pilih fungsi aktivasi dan turunannya
-        if self.activation_str == '''sigmoid''':
-            self.activation = sigmoid
-            self.activation_derivative = sigmoid_derivative
-        elif self.activation_str == '''tanh''':
-            self.activation = tanh
-            self.activation_derivative = tanh_derivative
-        else: # Default ke ReLU
-            self.activation = relu
-            self.activation_derivative = relu_derivative
-            
-        # Variabel untuk menyimpan state selama forward pass untuk digunakan di backward pass
-        self.inputs = []
-        self.z = [] # Output sebelum aktivasi
-
-    def forward(self, inputs):
-        """Melakukan forward pass dan menyimpan state untuk backward pass."""
-        self.inputs = inputs
-        self.z = []
-        outputs = []
-        for i in range(self.output_size):
-            net_input = sum(inputs[j] * self.weights[i][j] for j in range(self.input_size)) + self.biases[i]
-            self.z.append(net_input)
-            outputs.append(self.activation(net_input))
-        return outputs
-
-    def backward(self, d_loss_d_output):
-        """Melakukan backward pass (backpropagation) untuk menghitung gradien."""
-        d_loss_d_z = [d_loss_d_output[i] * self.activation_derivative(self.z[i]) for i in range(self.output_size)]
-        
-        self.d_loss_d_weights = [[0]*self.input_size for _ in range(self.output_size)]
-        self.d_loss_d_biases = [0]*self.output_size
-        d_loss_d_input = [0]*self.input_size
-
-        for i in range(self.output_size):
-            # Gradien untuk bobot
-            for j in range(self.input_size):
-                self.d_loss_d_weights[i][j] = d_loss_d_z[i] * self.inputs[j]
-            
-            # Gradien untuk bias
-            self.d_loss_d_biases[i] = d_loss_d_z[i]
-
-            # Gradien untuk input lapisan sebelumnya
-            for j in range(self.input_size):
-                d_loss_d_input[j] += self.weights[i][j] * d_loss_d_z[i]
-                
-        return d_loss_d_input
-
-    def update(self, learning_rate):
-        """Memperbarui bobot dan bias menggunakan gradien yang dihitung."""
-        for i in range(self.output_size):
-            for j in range(self.input_size):
-                self.weights[i][j] -= learning_rate * self.d_loss_d_weights[i][j]
-            self.biases[i] -= learning_rate * self.d_loss_d_biases[i]
-
-
-class ModularNeuralNetwork:
-    """Jaringan Saraf modular yang mendukung pelatihan melalui backpropagation."""
-    def __init__(self):
-        self.layers = []
-        print("Modular Neural Network with backpropagation initialized.")
-
-    def add_layer(self, layer: DenseLayer):
-        self.layers.append(layer)
-
-    def predict(self, inputs):
-        current_outputs = inputs
-        for layer in self.layers:
-            current_outputs = layer.forward(current_outputs)
-        return current_outputs
-
-    def train(self, X_train, y_train, epochs, learning_rate):
-        """Melatih jaringan menggunakan dataset yang diberikan."""
-        print(f"Starting training for {epochs} epochs with learning rate {learning_rate}...")
-        for epoch in range(epochs):
-            total_loss = 0
-            for x, y_true in zip(X_train, y_train):
-                # Forward pass
-                y_pred = self.predict(x)
-                
-                # Hitung loss
-                total_loss += mse_loss(y_pred, y_true)
-                
-                # Backward pass
-                d_loss = mse_loss_derivative(y_pred, y_true)
-                
-                # Propagasi error ke belakang melalui semua lapisan
-                for layer in reversed(self.layers):
-                    d_loss = layer.backward(d_loss)
-            
-                # Perbarui bobot
-                for layer in self.layers:
-                    layer.update(learning_rate)
-
-            # Tampilkan loss rata-rata setiap beberapa epoch
-            if (epoch + 1) % 100 == 0:
-                avg_loss = total_loss / len(X_train)
-                print(f'Epoch {epoch + 1}/{epochs}, Loss: {avg_loss:.6f}')
-        print("Training complete.")
-
-    def save_weights(self, path):
-        """Menyimpan bobot dan bias jaringan ke file JSON."""
-        model_data = {
-            "layers": [
-                {
-                    "weights": layer.weights,
-                    "biases": layer.biases,
-                    "activation": layer.activation_str
-                } for layer in self.layers
-            ]
-        }
-        with open(path, 'w') as f:
-            json.dump(model_data, f, indent=4)
-        print(f"Model weights saved to {path}")
-
-    def load_weights(self, path):
-        """Memuat bobot dan bias jaringan dari file JSON."""
-        with open(path, 'r') as f:
-            model_data = json.load(f)
-        
-        if len(self.layers) != len(model_data["layers"]):
-            raise ValueError("Arsitektur jaringan yang dimuat tidak cocok dengan arsitektur saat ini.")
-
-        for i, layer_data in enumerate(model_data["layers"]):
-            self.layers[i].weights = layer_data["weights"]
-            self.layers[i].biases = layer_data["biases"]
-        print(f"Model weights loaded from {path}")
-
-
-# --- Contoh Penggunaan: Melatih Jaringan untuk Masalah XOR ---
-
-if __name__ == '''__main__''':
-    # Data training untuk XOR
-    X_train = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    y_train = [[0], [1], [1], [0]]
-
-    # 1. Buat instance jaringan
-    xor_net = ModularNeuralNetwork()
-
-    # 2. Tentukan arsitektur (input 2 -> hidden 3 -> output 1)
-    # Menggunakan tanh karena cocok untuk output antara -1 dan 1, tetapi sigmoid juga berfungsi
-    xor_net.add_layer(DenseLayer(2, 3, activation='''tanh'''))
-    xor_net.add_layer(DenseLayer(3, 1, activation='''tanh'''))
-
-    # 3. Latih jaringan
-    xor_net.train(X_train, y_train, epochs=2000, learning_rate=0.1)
-
-    # 4. Uji jaringan setelah pelatihan
-    print("\n--- Testing after training ---")
-    for x in X_train:
-        prediction = xor_net.predict(x)
-        # Output dari tanh adalah antara -1 dan 1, kita bulatkan ke 0 atau 1
-        final_prediction = 1 if prediction[0] > 0 else 0
-        print(f"Input: {x}, Prediction: {prediction[0]:.4f}, Result: {final_prediction}")
-
-    # 5. Simpan bobot yang telah dilatih
-    # xor_net.save_weights("xor_model.json")
-
-    # # 6. Buat jaringan baru dan muat bobot untuk verifikasi
-    # new_xor_net = ModularNeuralNetwork()
-    # new_xor_net.add_layer(DenseLayer(2, 3, activation='''tanh'''))
-    # new_xor_net.add_layer(DenseLayer(3, 1, activation='''tanh'''))
-    # new_xor_net.load_weights("xor_model.json")
+def softmax(x):
+    """Menghitung fungsi softmax untuk baris terakhir dari skor input."""
+    # Ambil baris terakhir jika x adalah matriks (untuk efisiensi selama generasi)
+    if x.ndim > 1:
+        x = x[-1, :]
     
-    # print("\n--- Testing loaded model ---")
-    # for x in X_train:
-    #     prediction = new_xor_net.predict(x)
-    #     final_prediction = 1 if prediction[0] > 0 else 0
-    #     print(f"Input: {x}, Prediction: {prediction[0]:.4f}, Result: {final_prediction}")
+    # Stabilitas numerik dengan mengurangi nilai maksimum
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0)
+
+class LayerNormalization:
+    """Implementasi Layer Normalization."""
+    def __init__(self, d_model, epsilon=1e-6):
+        self.gamma = np.ones(d_model)
+        self.beta = np.zeros(d_model)
+        self.epsilon = epsilon
+
+    def forward(self, x):
+        mean = x.mean(axis=-1, keepdims=True)
+        std = x.std(axis=-1, keepdims=True)
+        return self.gamma * (x - mean) / (std + self.epsilon) + self.beta
+
+class MultiHeadAttention:
+    """Implementasi Multi-Head Attention berbasis NumPy."""
+    def __init__(self, d_model, num_heads):
+        self.num_heads = num_heads
+        self.d_model = d_model
+        assert d_model % self.num_heads == 0
+        self.depth = d_model // self.num_heads
+
+        # Inisialisasi bobot tunggal untuk Q, K, V untuk efisiensi
+        self.wq = np.random.randn(d_model, d_model) * 0.01
+        self.wk = np.random.randn(d_model, d_model) * 0.01
+        self.wv = np.random.randn(d_model, d_model) * 0.01
+        self.dense = np.random.randn(d_model, d_model) * 0.01
+
+    def scaled_dot_product_attention(self, q, k, v, mask):
+        matmul_qk = np.matmul(q, k.transpose(0, 1, 3, 2))
+        dk = k.shape[-1]
+        scaled_attention_logits = matmul_qk / np.sqrt(dk)
+
+        if mask is not None:
+            scaled_attention_logits += (mask * -1e9)
+
+        attention_weights = softmax(scaled_attention_logits)
+        output = np.matmul(attention_weights, v)
+        return output
+
+    def split_heads(self, x, batch_size):
+        x = x.reshape(batch_size, -1, self.num_heads, self.depth)
+        return x.transpose(0, 2, 1, 3)
+
+    def forward(self, v, k, q, mask):
+        batch_size = q.shape[0]
+
+        q = np.dot(q, self.wq)
+        k = np.dot(k, self.wk)
+        v = np.dot(v, self.wv)
+
+        q = self.split_heads(q, batch_size)
+        k = self.split_heads(k, batch_size)
+        v = self.split_heads(v, batch_size)
+
+        scaled_attention = self.scaled_dot_product_attention(q, k, v, mask)
+        scaled_attention = scaled_attention.transpose(0, 2, 1, 3)
+        
+        concat_attention = scaled_attention.reshape(batch_size, -1, self.d_model)
+        output = np.dot(concat_attention, self.dense)
+        return output
+
+class PositionwiseFeedForward:
+    """Implementasi Jaringan Feed-Forward Position-wise."""
+    def __init__(self, d_model, d_ff):
+        self.w1 = np.random.randn(d_model, d_ff) * 0.01
+        self.b1 = np.zeros(d_ff)
+        self.w2 = np.random.randn(d_ff, d_model) * 0.01
+        self.b2 = np.zeros(d_model)
+
+    def forward(self, x):
+        x = np.maximum(0, np.dot(x, self.w1) + self.b1) # ReLU
+        return np.dot(x, self.w2) + self.b2
+
+class EncoderLayer:
+    """Satu lapisan Encoder tunggal."""
+    def __init__(self, d_model, num_heads, d_ff):
+        self.mha = MultiHeadAttention(d_model, num_heads)
+        self.ffn = PositionwiseFeedForward(d_model, d_ff)
+        self.layernorm1 = LayerNormalization(d_model)
+        self.layernorm2 = LayerNormalization(d_model)
+
+    def forward(self, x, mask):
+        attn_output = self.mha.forward(x, x, x, mask)
+        out1 = self.layernorm1.forward(x + attn_output)
+        ffn_output = self.ffn.forward(out1)
+        out2 = self.layernorm2.forward(out1 + ffn_output)
+        return out2
+
+class DecoderLayer:
+    """Satu lapisan Decoder tunggal."""
+    def __init__(self, d_model, num_heads, d_ff):
+        self.mha1 = MultiHeadAttention(d_model, num_heads)
+        self.mha2 = MultiHeadAttention(d_model, num_heads)
+        self.ffn = PositionwiseFeedForward(d_model, d_ff)
+        self.layernorm1 = LayerNormalization(d_model)
+        self.layernorm2 = LayerNormalization(d_model)
+        self.layernorm3 = LayerNormalization(d_model)
+
+    def forward(self, x, enc_output, look_ahead_mask, padding_mask):
+        attn1 = self.mha1.forward(x, x, x, look_ahead_mask)
+        out1 = self.layernorm1.forward(x + attn1)
+
+        attn2 = self.mha2.forward(enc_output, enc_output, out1, padding_mask)
+        out2 = self.layernorm2.forward(out1 + attn2)
+
+        ffn_output = self.ffn.forward(out2)
+        out3 = self.layernorm3.forward(out2 + ffn_output)
+        return out3
+
+class Transformer:
+    """Arsitektur Transformer lengkap berbasis NumPy."""
+    def __init__(self, num_layers, d_model, num_heads, d_ff, input_vocab_size, target_vocab_size, max_seq_len):
+        self.num_layers = num_layers
+        self.d_model = d_model
+        
+        self.encoder_embedding = np.random.randn(input_vocab_size, d_model) * 0.01
+        self.decoder_embedding = np.random.randn(target_vocab_size, d_model) * 0.01
+        self.pos_encoding = self.positional_encoding(max_seq_len, d_model)
+
+        self.encoder_layers = [EncoderLayer(d_model, num_heads, d_ff) for _ in range(num_layers)]
+        self.decoder_layers = [DecoderLayer(d_model, num_heads, d_ff) for _ in range(num_layers)]
+
+        self.final_layer = np.random.randn(d_model, target_vocab_size) * 0.01
+
+    def positional_encoding(self, position, d_model):
+        angle_rads = self.get_angles(np.arange(position)[:, np.newaxis],
+                                     np.arange(d_model)[np.newaxis, :],
+                                     d_model)
+        angle_rads[:, 0::2] = np.sin(angle_rads[:, 0::2])
+        angle_rads[:, 1::2] = np.cos(angle_rads[:, 1::2])
+        pos_encoding = angle_rads[np.newaxis, ...]
+        return pos_encoding.astype(np.float32)
+
+    def get_angles(self, pos, i, d_model):
+        angle_rates = 1 / np.power(10000, (2 * (i // 2)) / np.float32(d_model))
+        return pos * angle_rates
+
+    def encode(self, x, mask):
+        seq_len = x.shape[1]
+        x_emb = self.encoder_embedding[x]
+        x_emb *= np.sqrt(self.d_model)
+        x_emb += self.pos_encoding[:, :seq_len, :]
+        
+        for i in range(self.num_layers):
+            x_emb = self.encoder_layers[i].forward(x_emb, mask)
+        return x_emb
+
+    def decode(self, x, enc_output, look_ahead_mask, padding_mask):
+        seq_len = x.shape[1]
+        x_emb = self.decoder_embedding[x]
+        x_emb *= np.sqrt(self.d_model)
+        x_emb += self.pos_encoding[:, :seq_len, :]
+        
+        for i in range(self.num_layers):
+            x_emb = self.decoder_layers[i].forward(x_emb, enc_output, look_ahead_mask, padding_mask)
+        return x_emb
+
+    def forward(self, inp, tar, enc_padding_mask, look_ahead_mask, dec_padding_mask):
+        enc_output = self.encode(inp, enc_padding_mask)
+        dec_output = self.decode(tar, enc_output, look_ahead_mask, dec_padding_mask)
+        final_output = np.dot(dec_output, self.final_layer)
+        return final_output

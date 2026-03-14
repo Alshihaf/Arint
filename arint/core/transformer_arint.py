@@ -1,249 +1,168 @@
-
 # core/transformer_arint.py
-# Implementasi Arsitektur Transformer dan Antarmuka Arint dari nol dengan Python murni.
+# Antarmuka tingkat tinggi untuk model Transformer berbasis NumPy.
 
-import math
-import random
-import json
+import numpy as np
 import re
-import os
 from collections import Counter
+import json
+import os
 
-# --- Komponen-Komponen Dasar ---
+# Impor kelas Transformer yang sekarang berada di neural_network.py
+from .neural_network import Transformer, softmax
 
-def softmax(x: list) -> list:
-    """Menghitung softmax untuk sebuah list angka untuk stabilitas numerik."""
-    if not x: return []
-    max_val = max(x)
-    e_x = [math.exp(i - max_val) for i in x]
-    sum_e_x = sum(e_x)
-    return [i / sum_e_x for i in e_x]
-
-class LayerNormalization:
-    """Implementasi Layer Normalization dengan Python murni."""
-    def __init__(self, size, epsilon=1e-6):
-        self.size = size
-        self.epsilon = epsilon
-        self.gamma = [1.0] * size # Bobot skala
-        self.beta = [0.0] * size  # Bobot geser
-
-    def forward(self, x: list) -> list:
-        # x adalah sebuah vektor
-        mean = sum(x) / self.size
-        variance = sum([(i - mean) ** 2 for i in x]) / self.size
-        std = math.sqrt(variance + self.epsilon)
-        
-        normalized = [(i - mean) / std for i in x]
-        
-        # Terapkan skala dan geser
-        return [(self.gamma[i] * normalized[i]) + self.beta[i] for i in range(self.size)]
-
-class PurePythonDenseLayer:
-    """Lapisan dense fungsionalitas minimal yang diperlukan untuk Transformer."""
-    def __init__(self, input_size, output_size):
-        # Inisialisasi He untuk aktivasi ReLU
-        limit = math.sqrt(6 / input_size)
-        self.weights = [[random.uniform(-limit, limit) for _ in range(input_size)] for _ in range(output_size)]
-        self.biases = [0.0] * output_size
-
-    def forward(self, inputs: list) -> list:
-        outputs = [0.0] * len(self.weights)
-        for i in range(len(self.weights)):
-            neuron_output = sum(inputs[j] * self.weights[i][j] for j in range(len(inputs))) + self.biases[i]
-            outputs[i] = neuron_output
-        return outputs
-
-class PositionwiseFeedForward:
-    """Implementasi Jaringan Feed-Forward Position-wise."""
-    def __init__(self, d_model, d_ff):
-        self.linear1 = PurePythonDenseLayer(d_model, d_ff)
-        self.linear2 = PurePythonDenseLayer(d_ff, d_model)
-
-    def relu(self, x: list) -> list:
-        return [max(0, val) for val in x]
-
-    def forward(self, x: list) -> list:
-        # x adalah sebuah vektor [d_model]
-        return self.linear2.forward(self.relu(self.linear1.forward(x)))
-
-
-# --- Komponen Arsitektur Transformer ---
-
-class MultiHeadAttention:
-    """Implementasi Multi-Head Attention dengan Python murni."""
-    def __init__(self, d_model, num_heads):
-        self.num_heads = num_heads
-        self.d_model = d_model
-        assert d_model % num_heads == 0, "d_model harus bisa dibagi oleh num_heads"
-        self.depth = d_model // num_heads
-
-        self.wq = [PurePythonDenseLayer(d_model, self.depth) for _ in range(num_heads)]
-        self.wk = [PurePythonDenseLayer(d_model, self.depth) for _ in range(num_heads)]
-        self.wv = [PurePythonDenseLayer(d_model, self.depth) for _ in range(num_heads)]
-        self.dense = PurePythonDenseLayer(d_model, d_model)
-
-    def scaled_dot_product_attention(self, q, k, v, mask=None):
-        matmul_qk = [[sum(q[i][d] * k[j][d] for d in range(self.depth)) for j in range(len(k))] for i in range(len(q))]
-        
-        scale_factor = math.sqrt(self.depth)
-        scaled_attention_logits = [[x / scale_factor for x in row] for row in matmul_qk]
-
-        if mask is not None:
-            for i in range(len(scaled_attention_logits)):
-                for j in range(len(scaled_attention_logits[i])):
-                    if mask[i][j] == 0:
-                        scaled_attention_logits[i][j] = -1e9
-
-        attention_weights = [softmax(row) for row in scaled_attention_logits]
-        
-        output = [[sum(attention_weights[i][j] * v[j][d] for j in range(len(v))) for d in range(self.depth)] for i in range(len(q))]
-        return output
-
-    def forward(self, v: list, k: list, q: list, mask=None) -> list:
-        heads = []
-        for i in range(self.num_heads):
-            query = [self.wq[i].forward(q_token) for q_token in q]
-            key = [self.wk[i].forward(k_token) for k_token in k]
-            value = [self.wv[i].forward(v_token) for v_token in v]
-            head = self.scaled_dot_product_attention(query, key, value, mask)
-            heads.append(head)
-        
-        concatenated = []
-        for token_idx in range(len(q)):
-            token_concat = []
-            for head in heads:
-                token_concat.extend(head[token_idx])
-            concatenated.append(token_concat)
-
-        output = [self.dense.forward(token_vec) for token_vec in concatenated]
-        return output
-
-class EncoderLayer:
-    """Satu lapisan Encoder tunggal."""
-    def __init__(self, d_model, num_heads, d_ff):
-        self.mha = MultiHeadAttention(d_model, num_heads)
-        self.ffn = PositionwiseFeedForward(d_model, d_ff)
-
-        self.norm1 = LayerNormalization(d_model)
-        self.norm2 = LayerNormalization(d_model)
-
-    def forward(self, x: list, mask=None) -> list:
-        # x adalah matriks: [seq_len, d_model]
-        
-        # Sub-lapisan 1: Multi-Head Attention
-        attn_output = self.mha.forward(x, x, x, mask)
-        # Koneksi residual dan normalisasi
-        sublayer1_out = [[x[i][j] + attn_output[i][j] for j in range(len(x[0]))] for i in range(len(x))]
-        sublayer1_out = [self.norm1.forward(vec) for vec in sublayer1_out]
-
-        # Sub-lapisan 2: Feed-Forward Network
-        ffn_output = [self.ffn.forward(vec) for vec in sublayer1_out]
-        # Koneksi residual dan normalisasi
-        sublayer2_out = [[sublayer1_out[i][j] + ffn_output[i][j] for j in range(len(sublayer1_out[0]))] for i in range(len(sublayer1_out))]
-        sublayer2_out = [self.norm2.forward(vec) for vec in sublayer2_out]
-
-        return sublayer2_out
-
-# --- Tokenizer ---
 class SimpleTokenizer:
-    # ... (implementasi tokenizer tetap sama)
+    """Tokenizer sederhana yang mengubah teks menjadi ID dan sebaliknya."""
     def __init__(self, vocab_size=5000):
         self.vocab_size = vocab_size
+        # Token khusus dasar
         self.word2idx = {'<PAD>': 0, '<UNK>': 1, '<BOS>': 2, '<EOS>': 3}
-        self.idx2word = {v: k for k, v in self.word2idx.items()}
+        self.idx2word = {0: '<PAD>', 1: '<UNK>', 2: '<BOS>', 3: '<EOS>'}
         self.fitted = False
 
     def fit(self, texts):
+        """Membangun kosakata dari daftar teks."""
         word_counts = Counter()
         for text in texts:
             words = re.findall(r'\w+', text.lower())
             word_counts.update(words)
+        
+        # Ambil kata-kata yang paling umum, sisakan ruang untuk token khusus
         most_common = word_counts.most_common(self.vocab_size - len(self.word2idx))
         for i, (word, _) in enumerate(most_common, start=len(self.word2idx)):
             self.word2idx[word] = i
             self.idx2word[i] = word
         self.fitted = True
 
-    def encode(self, text, max_len=50):
+    def encode(self, text, max_len):
+        """Meng-encode satu kalimat menjadi daftar ID dengan padding."""
         words = re.findall(r'\w+', text.lower())
         ids = [self.word2idx.get(w, self.word2idx['<UNK>']) for w in words]
+        
+        # Tambahkan token BOS dan EOS
         ids = [self.word2idx['<BOS>']] + ids + [self.word2idx['<EOS>']]
+        
+        # Terapkan padding atau pemotongan
         padded_ids = ids[:max_len] + [self.word2idx['<PAD>']] * (max_len - len(ids))
         return padded_ids
 
     def decode(self, ids):
+        """Mendekode daftar ID kembali menjadi kalimat."""
         special_tokens = {self.word2idx['<PAD>'], self.word2idx['<BOS>'], self.word2idx['<EOS>']}
-        return ' '.join(self.idx2word.get(i, '<UNK>') for i in ids if i not in special_tokens)
+        words = [self.idx2word.get(i, '<UNK>') for i in ids if i not in special_tokens]
+        return ' '.join(words)
 
-# --- Kelas Kerangka TransformerArint ---
+
 class TransformerArint:
-    def __init__(self, config=None):
-        # ... (implementasi init tetap sama, tetapi sekarang akan membangun encoder)
+    """Kelas pembungkus yang mengelola model Transformer dan tokenisasi."""
+    def __init__(self, config=None, model_path="memory/transformer_model.npz", tokenizer_path="memory/tokenizer.json"):
         if config is None:
+            # Konfigurasi default jika tidak ada yang disediakan
             config = {
-                'd_model': 64, 'num_heads': 4, 'N': 2, 'd_ff': 128,
-                'vocab_size': 5000, 'max_seq_len': 50
+                'num_layers': 2,
+                'd_model': 64,
+                'num_heads': 4,
+                'd_ff': 128,
+                'vocab_size': 5000,
+                'max_seq_len': 50
             }
-        print("Initializing TransformerArint (Pure Python Version)...")
         self.config = config
-        self.d_model = config['d_model']
-        self.N = config['N']
+        self.model_path = model_path
+        self.tokenizer_path = tokenizer_path
+
+        # Inisialisasi model Transformer dan Tokenizer
+        self.transformer = Transformer(
+            num_layers=config['num_layers'],
+            d_model=config['d_model'],
+            num_heads=config['num_heads'],
+            d_ff=config['d_ff'],
+            input_vocab_size=config['vocab_size'],
+            target_vocab_size=config['vocab_size'],
+            max_seq_len=config['max_seq_len']
+        )
         self.tokenizer = SimpleTokenizer(vocab_size=config['vocab_size'])
-        self.model_path = "memory/transformer_arint_model.json"
-        self.tokenizer_path = "memory/transformer_arint_tokenizer.json"
 
-        # Inisialisasi komponen Transformer
-        self.embedding = PurePythonDenseLayer(self.config['vocab_size'], self.d_model)
-        self.encoder_layers = [EncoderLayer(self.d_model, config['num_heads'], config['d_ff']) for _ in range(self.N)]
+        # Coba muat model dan tokenizer yang ada saat inisialisasi
+        self.load_tokenizer()
+        self.load_model()
+
+    def _create_masks(self, inp, tar):
+        # Mask padding Encoder: Mask token <PAD> di input
+        enc_padding_mask = (inp == self.tokenizer.word2idx['<PAD>']).astype(np.float32)[:, np.newaxis, np.newaxis, :]
+
+        # Mask look-ahead Decoder: Mencegah posisi memperhatikan posisi berikutnya
+        look_ahead_mask = 1 - np.triu(np.ones((tar.shape[1], tar.shape[1])), k=1)
+        look_ahead_mask = look_ahead_mask[np.newaxis, np.newaxis, :, :]
+
+        # Mask padding Decoder: Mask token <PAD> di target
+        dec_padding_mask = (tar == self.tokenizer.word2idx['<PAD>']).astype(np.float32)[:, np.newaxis, np.newaxis, :]
         
-        # TODO: Tambahkan Positional Encoding, Decoder, dan Final Layer
+        # Gabungkan mask look-ahead dengan mask padding untuk target
+        combined_mask = np.maximum(dec_padding_mask, (1 - look_ahead_mask) * -1e9)
 
-        print("TransformerArint initialized with Encoder blocks.")
+        return enc_padding_mask, combined_mask, dec_padding_mask
 
-    def encode_sentence(self, text: str) -> list:
-        """Mengubah kalimat menjadi representasi vektor (embedding)."""
-        # 1. Tokenize dan one-hot encode
-        token_ids = self.tokenizer.encode(text, max_len=self.config['max_seq_len'])
-        
-        # Simple one-hot encoding
-        one_hot_vectors = []
-        for id in token_ids:
-            vec = [0.0] * self.config['vocab_size']
-            if id < self.config['vocab_size']:
-                vec[id] = 1.0
-            one_hot_vectors.append(vec)
+    def generate(self, prompt, max_new_tokens=50, temperature=1.0):
+        """Menghasilkan teks dari prompt menggunakan model.
+
+        Args:
+            prompt (str): Teks input untuk memulai generasi.
+            max_new_tokens (int): Jumlah maksimum token baru untuk dihasilkan.
+            temperature (float): Mengontrol keacakan. Nilai lebih tinggi berarti lebih acak.
+        """
+        inp_ids = self.tokenizer.encode(prompt, self.config['max_seq_len'])
+        inp_array = np.array(inp_ids)[np.newaxis, :] # Buat dimensi batch
+
+        # Urutan output dimulai dengan token <BOS>
+        output_ids = [self.tokenizer.word2idx['<BOS>']]
+
+        for _ in range(max_new_tokens):
+            tar_array = np.array(output_ids)[np.newaxis, :] 
+
+            # Buat mask yang sesuai untuk forward pass
+            _, combined_mask, _ = self._create_masks(inp_array, tar_array)
+
+            # Dapatkan prediksi dari Transformer
+            predictions = self.transformer.forward(inp_array, tar_array, None, combined_mask, None)
             
-        # 2. Embedding
-        embedded_input = [self.embedding.forward(vec) for vec in one_hot_vectors]
+            # Ambil probabilitas untuk token terakhir dan terapkan suhu
+            last_token_logits = predictions[0, -1, :]
+            scaled_logits = last_token_logits / temperature
+            probabilities = softmax(scaled_logits)
 
-        # TODO: Tambahkan Positional Encoding di sini
+            # Ambil sampel token dari distribusi probabilitas
+            next_token_id = np.random.choice(len(probabilities), p=probabilities)
 
-        # 3. Proses melalui Encoder
-        encoder_output = embedded_input
-        for i in range(self.N):
-            encoder_output = self.encoder_layers[i].forward(encoder_output)
+            # Hentikan jika token <EOS> dihasilkan
+            if next_token_id == self.tokenizer.word2idx['<EOS>']:
+                break
 
-        # 4. Global Average Pooling (rata-rata vektor token)
-        if not encoder_output or not encoder_output[0]: return [0.0] * self.d_model
-        avg_vector = [0.0] * self.d_model
-        for i in range(self.d_model):
-            avg_vector[i] = sum(token_vec[i] for token_vec in encoder_output) / len(encoder_output)
+            output_ids.append(next_token_id)
 
-        print(f"--- INFO: Successfully encoded '{text[:20]}...' to a vector. ---")
-        return avg_vector
+        return self.tokenizer.decode(output_ids)
 
-    # ... (metode stub untuk generate, save, load tetap sama untuk saat ini) ...
-    def generate(self, prompt, max_new_tokens=20):
-        print(f"--- WARNING: Transformer.generate is a stub. ---")
-        return prompt # Hanya mengembalikan prompt
+    def save_model(self):
+        """Menyimpan semua bobot model Transformer ke file .npz."""
+        # Implementasi ini perlu diperluas untuk menyimpan semua bobot
+        # Placeholder untuk menunjukkan fungsionalitas
+        np.savez_compressed(self.model_path, final_layer=self.transformer.final_layer)
+        print(f"Model (placeholder) saved to {self.model_path}")
 
-    def save(self):
-        print(f"--- WARNING: Transformer.save is a stub. ---")
-
-    def load(self):
-        print("--- WARNING: Transformer.load is a stub. ---")
+    def load_model(self):
+        """Memuat bobot model dari file .npz jika ada."""
+        if os.path.exists(self.model_path):
+            try:
+                data = np.load(self.model_path)
+                # Contoh memuat satu set bobot
+                if 'final_layer' in data and data['final_layer'].shape == self.transformer.final_layer.shape:
+                    self.transformer.final_layer = data['final_layer']
+                print(f"Model (placeholder) loaded from {self.model_path}")
+            except Exception as e:
+                print(f"Failed to load model from {self.model_path}: {e}")
+        else:
+            print("No saved model found. Using new random weights.")
 
     def save_tokenizer(self):
+        """Menyimpan kosakata tokenizer ke file JSON."""
         with open(self.tokenizer_path, 'w') as f:
             json.dump({
                 'word2idx': self.tokenizer.word2idx,
@@ -253,13 +172,15 @@ class TransformerArint:
         print(f"Tokenizer saved to {self.tokenizer_path}")
 
     def load_tokenizer(self):
+        """Memuat kosakata tokenizer dari file JSON jika ada."""
         if os.path.exists(self.tokenizer_path):
             with open(self.tokenizer_path, 'r') as f:
                 data = json.load(f)
                 self.tokenizer.word2idx = data['word2idx']
+                # Pastikan kunci untuk idx2word adalah integer
                 self.tokenizer.idx2word = {int(k): v for k, v in data['idx2word'].items()}
                 self.tokenizer.vocab_size = data['vocab_size']
                 self.tokenizer.fitted = True
             print(f"Tokenizer loaded from {self.tokenizer_path}")
         else:
-            print("No tokenizer file found.")
+            print("No tokenizer file found. A new one will be created if training data is provided.")
