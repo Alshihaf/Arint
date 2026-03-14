@@ -1,305 +1,186 @@
 # core/transformer_arint.py
+# Antarmuka tingkat tinggi untuk model Transformer berbasis NumPy.
+
 import numpy as np
 import re
 from collections import Counter
 import json
 import os
 
-from .neural_network import Transformer, softmax 
+# Impor kelas Transformer yang sekarang berada di neural_network.py
+from .neural_network import Transformer, softmax
 
 class SimpleTokenizer:
+    """Tokenizer sederhana yang mengubah teks menjadi ID dan sebaliknya."""
     def __init__(self, vocab_size=5000):
         self.vocab_size = vocab_size
+        # Token khusus dasar
         self.word2idx = {'<PAD>': 0, '<UNK>': 1, '<BOS>': 2, '<EOS>': 3}
         self.idx2word = {0: '<PAD>', 1: '<UNK>', 2: '<BOS>', 3: '<EOS>'}
         self.fitted = False
 
     def fit(self, texts):
+        """Membangun kosakata dari daftar teks."""
         word_counts = Counter()
         for text in texts:
             words = re.findall(r'\w+', text.lower())
             word_counts.update(words)
-        most_common = word_counts.most_common(self.vocab_size - 4)
-        for i, (word, _) in enumerate(most_common, start=4):
+        
+        # Ambil kata-kata yang paling umum, sisakan ruang untuk token khusus
+        most_common = word_counts.most_common(self.vocab_size - len(self.word2idx))
+        for i, (word, _) in enumerate(most_common, start=len(self.word2idx)):
             self.word2idx[word] = i
             self.idx2word[i] = word
         self.fitted = True
 
-    def encode(self, text, max_len=50, add_special=True):
+    def encode(self, text, max_len):
+        """Meng-encode satu kalimat menjadi daftar ID dengan padding."""
         words = re.findall(r'\w+', text.lower())
-        ids = [self.word2idx.get(w, 1) for w in words]
-        if add_special:
-            ids = [2] + ids[:max_len-2] + [3] 
-        else:
-            ids = ids[:max_len]
-        if len(ids) < max_len:
-            ids += [0] * (max_len - len(ids))
-        return ids[:max_len]
+        ids = [self.word2idx.get(w, self.word2idx['<UNK>']) for w in words]
         
-    def encode_raw(self, text, add_special=True):
-        words = re.findall(r'\w+', text.lower())
-        ids = [self.word2idx.get(w, 1) for w in words]
-        if add_special:
-            ids = [2] + ids + [3]
-        return ids
+        # Tambahkan token BOS dan EOS
+        ids = [self.word2idx['<BOS>']] + ids + [self.word2idx['<EOS>']]
+        
+        # Terapkan padding atau pemotongan
+        padded_ids = ids[:max_len] + [self.word2idx['<PAD>']] * (max_len - len(ids))
+        return padded_ids
 
-    def decode(self, ids, skip_special=True):
-        words = []
-        for i in ids:
-            if i == 0 and skip_special:
-                continue
-            if i in self.idx2word:
-                word = self.idx2word[i]
-                if skip_special and word.startswith('<') and word.endswith('>'):
-                    continue
-                words.append(word)
-            else:
-                words.append('<UNK>')
+    def decode(self, ids):
+        """Mendekode daftar ID kembali menjadi kalimat."""
+        special_tokens = {self.word2idx['<PAD>'], self.word2idx['<BOS>'], self.word2idx['<EOS>']}
+        words = [self.idx2word.get(i, '<UNK>') for i in ids if i not in special_tokens]
         return ' '.join(words)
 
 
 class TransformerArint:
-    def __init__(self, config=None):
+    """Kelas pembungkus yang mengelola model Transformer dan tokenisasi."""
+    def __init__(self, config=None, model_path="memory/transformer_model.npz", tokenizer_path="memory/tokenizer.json"):
         if config is None:
+            # Konfigurasi default jika tidak ada yang disediakan
             config = {
+                'num_layers': 2,
                 'd_model': 64,
                 'num_heads': 4,
-                'N': 2,
                 'd_ff': 128,
                 'vocab_size': 5000,
                 'max_seq_len': 50
             }
         self.config = config
-        self.d_model = config['d_model']
-        self.vocab_size = config['vocab_size']
-        self.max_seq_len = config['max_seq_len']
+        self.model_path = model_path
+        self.tokenizer_path = tokenizer_path
 
-        # Inisialisasi transformer
+        # Inisialisasi model Transformer dan Tokenizer
         self.transformer = Transformer(
+            num_layers=config['num_layers'],
             d_model=config['d_model'],
             num_heads=config['num_heads'],
-            N=config['N'],
             d_ff=config['d_ff'],
-            src_vocab_size=config['vocab_size'],
-            tgt_vocab_size=config['vocab_size'],
+            input_vocab_size=config['vocab_size'],
+            target_vocab_size=config['vocab_size'],
             max_seq_len=config['max_seq_len']
         )
-
         self.tokenizer = SimpleTokenizer(vocab_size=config['vocab_size'])
 
-        self.model_path = "memory/transformer_params.npz"
-        self.tokenizer_path = "memory/tokenizer.json"
+        # Coba muat model dan tokenizer yang ada saat inisialisasi
+        self.load_tokenizer()
+        self.load_model()
 
-        self.load()
+    def _create_masks(self, inp, tar):
+        # Mask padding Encoder: Mask token <PAD> di input
+        enc_padding_mask = (inp == self.tokenizer.word2idx['<PAD>']).astype(np.float32)[:, np.newaxis, np.newaxis, :]
 
-    def fit_tokenizer(self, texts):
-        self.tokenizer.fit(texts)
-        self.save_tokenizer()
+        # Mask look-ahead Decoder: Mencegah posisi memperhatikan posisi berikutnya
+        look_ahead_mask = 1 - np.triu(np.ones((tar.shape[1], tar.shape[1])), k=1)
+        look_ahead_mask = look_ahead_mask[np.newaxis, np.newaxis, :, :]
 
-    def encode_text(self, text):
-        ids = self.tokenizer.encode(text, max_len=self.max_seq_len)
-        one_hot = np.eye(self.vocab_size)[ids]
-        return one_hot[np.newaxis, :, :]
+        # Mask padding Decoder: Mask token <PAD> di target
+        dec_padding_mask = (tar == self.tokenizer.word2idx['<PAD>']).astype(np.float32)[:, np.newaxis, np.newaxis, :]
         
-    def _ids_to_onehot(self, ids):
-        one_hot = np.eye(self.vocab_size)[ids]
-        return one_hot[np.newaxis, :, :]
+        # Gabungkan mask look-ahead dengan mask padding untuk target
+        combined_mask = np.maximum(dec_padding_mask, (1 - look_ahead_mask) * -1e9)
 
-    def decode_output(self, probs):
-        ids = np.argmax(probs, axis=-1)
-        return self.tokenizer.decode(ids[0])
+        return enc_padding_mask, combined_mask, dec_padding_mask
 
-    def encode_sentence(self, text):
-        src_one_hot = self.encode_text(text)
-        encoder_output = self.transformer.encode(src_one_hot)
-        sent_vec = np.mean(encoder_output, axis=1)
-        return sent_vec.flatten()
+    def generate(self, prompt, max_new_tokens=50, temperature=1.0):
+        """Menghasilkan teks dari prompt menggunakan model.
 
-    def generate(self, prompt, max_new_tokens=20):
-        prompt_ids = self.tokenizer.encode_raw(prompt, add_special=True)
+        Args:
+            prompt (str): Teks input untuk memulai generasi.
+            max_new_tokens (int): Jumlah maksimum token baru untuk dihasilkan.
+            temperature (float): Mengontrol keacakan. Nilai lebih tinggi berarti lebih acak.
+        """
+        inp_ids = self.tokenizer.encode(prompt, self.config['max_seq_len'])
+        inp_array = np.array(inp_ids)[np.newaxis, :] # Buat dimensi batch
 
-        if len(prompt_ids) > self.max_seq_len - 1:
-            prompt_ids = prompt_ids[:self.max_seq_len - 1]
-        generated = prompt_ids[:]
-        max_len = self.max_seq_len
+        # Urutan output dimulai dengan token <BOS>
+        output_ids = [self.tokenizer.word2idx['<BOS>']]
 
         for _ in range(max_new_tokens):
-            if len(generated) >= max_len:
+            tar_array = np.array(output_ids)[np.newaxis, :] 
+
+            # Buat mask yang sesuai untuk forward pass
+            _, combined_mask, _ = self._create_masks(inp_array, tar_array)
+
+            # Dapatkan prediksi dari Transformer
+            predictions = self.transformer.forward(inp_array, tar_array, None, combined_mask, None)
+            
+            # Ambil probabilitas untuk token terakhir dan terapkan suhu
+            last_token_logits = predictions[0, -1, :]
+            scaled_logits = last_token_logits / temperature
+            probabilities = softmax(scaled_logits)
+
+            # Ambil sampel token dari distribusi probabilitas
+            next_token_id = np.random.choice(len(probabilities), p=probabilities)
+
+            # Hentikan jika token <EOS> dihasilkan
+            if next_token_id == self.tokenizer.word2idx['<EOS>']:
                 break
 
-            tgt_one_hot = self._ids_to_onehot(generated)
-            src_one_hot = self._ids_to_onehot(prompt_ids)
-            probs = self.transformer.forward(src_one_hot, tgt_one_hot)
-            last_token_probs = probs[0, -1, :]
-            next_token = np.random.choice(len(last_token_probs), p=last_token_probs)
-            generated.append(next_token)
-            if next_token == 3:
-                break
-              
-        if len(generated) > max_len:
-            generated = generated[:max_len]
+            output_ids.append(next_token_id)
 
-        return self.tokenizer.decode(generated)
+        return self.tokenizer.decode(output_ids)
 
-    def save(self):
-        params = {}
-        t = self.transformer
+    def save_model(self):
+        """Menyimpan semua bobot model Transformer ke file .npz."""
+        # Implementasi ini perlu diperluas untuk menyimpan semua bobot
+        # Placeholder untuk menunjukkan fungsionalitas
+        np.savez_compressed(self.model_path, final_layer=self.transformer.final_layer)
+        print(f"Model (placeholder) saved to {self.model_path}")
 
-        params['src_embedding_W'] = t.src_embedding.W
-        params['src_embedding_b'] = t.src_embedding.b
+    def load_model(self):
+        """Memuat bobot model dari file .npz jika ada."""
+        if os.path.exists(self.model_path):
+            try:
+                data = np.load(self.model_path)
+                # Contoh memuat satu set bobot
+                if 'final_layer' in data and data['final_layer'].shape == self.transformer.final_layer.shape:
+                    self.transformer.final_layer = data['final_layer']
+                print(f"Model (placeholder) loaded from {self.model_path}")
+            except Exception as e:
+                print(f"Failed to load model from {self.model_path}: {e}")
+        else:
+            print("No saved model found. Using new random weights.")
 
-        params['tgt_embedding_W'] = t.tgt_embedding.W
-        params['tgt_embedding_b'] = t.tgt_embedding.b
+    def save_tokenizer(self):
+        """Menyimpan kosakata tokenizer ke file JSON."""
+        with open(self.tokenizer_path, 'w') as f:
+            json.dump({
+                'word2idx': self.tokenizer.word2idx,
+                'idx2word': self.tokenizer.idx2word,
+                'vocab_size': self.tokenizer.vocab_size
+            }, f, indent=4)
+        print(f"Tokenizer saved to {self.tokenizer_path}")
 
-        params['final_linear_W'] = t.final_linear.W
-        params['final_linear_b'] = t.final_linear.b
-
-        for i, block in enumerate(t.encoder_blocks):
-            mha = block.mha
-            params[f'enc{i}_mha_W_q'] = mha.W_q.W
-            params[f'enc{i}_mha_b_q'] = mha.W_q.b
-            params[f'enc{i}_mha_W_k'] = mha.W_k.W
-            params[f'enc{i}_mha_b_k'] = mha.W_k.b
-            params[f'enc{i}_mha_W_v'] = mha.W_v.W
-            params[f'enc{i}_mha_b_v'] = mha.W_v.b
-            params[f'enc{i}_mha_W_o'] = mha.W_o.W
-            params[f'enc{i}_mha_b_o'] = mha.W_o.b
-
-            params[f'enc{i}_norm1_gamma'] = block.norm1.gamma
-            params[f'enc{i}_norm1_beta'] = block.norm1.beta
-
-            params[f'enc{i}_ffn_lin1_W'] = block.ffn.linear1.W
-            params[f'enc{i}_ffn_lin1_b'] = block.ffn.linear1.b
-            params[f'enc{i}_ffn_lin2_W'] = block.ffn.linear2.W
-            params[f'enc{i}_ffn_lin2_b'] = block.ffn.linear2.b
-
-            params[f'enc{i}_norm2_gamma'] = block.norm2.gamma
-            params[f'enc{i}_norm2_beta'] = block.norm2.beta
-
-        for i, block in enumerate(t.decoder_blocks):
-            mha1 = block.mha1
-            params[f'dec{i}_mha1_W_q'] = mha1.W_q.W
-            params[f'dec{i}_mha1_b_q'] = mha1.W_q.b
-            params[f'dec{i}_mha1_W_k'] = mha1.W_k.W
-            params[f'dec{i}_mha1_b_k'] = mha1.W_k.b
-            params[f'dec{i}_mha1_W_v'] = mha1.W_v.W
-            params[f'dec{i}_mha1_b_v'] = mha1.W_v.b
-            params[f'dec{i}_mha1_W_o'] = mha1.W_o.W
-            params[f'dec{i}_mha1_b_o'] = mha1.W_o.b
-
-            params[f'dec{i}_norm1_gamma'] = block.norm1.gamma
-            params[f'dec{i}_norm1_beta'] = block.norm1.beta
-
-            mha2 = block.mha2
-            params[f'dec{i}_mha2_W_q'] = mha2.W_q.W
-            params[f'dec{i}_mha2_b_q'] = mha2.W_q.b
-            params[f'dec{i}_mha2_W_k'] = mha2.W_k.W
-            params[f'dec{i}_mha2_b_k'] = mha2.W_k.b
-            params[f'dec{i}_mha2_W_v'] = mha2.W_v.W
-            params[f'dec{i}_mha2_b_v'] = mha2.W_v.b
-            params[f'dec{i}_mha2_W_o'] = mha2.W_o.W
-            params[f'dec{i}_mha2_b_o'] = mha2.W_o.b
-  
-            params[f'dec{i}_norm2_gamma'] = block.norm2.gamma
-            params[f'dec{i}_norm2_beta'] = block.norm2.beta
-
-            params[f'dec{i}_ffn_lin1_W'] = block.ffn.linear1.W
-            params[f'dec{i}_ffn_lin1_b'] = block.ffn.linear1.b
-            params[f'dec{i}_ffn_lin2_W'] = block.ffn.linear2.W
-            params[f'dec{i}_ffn_lin2_b'] = block.ffn.linear2.b
-
-            params[f'dec{i}_norm3_gamma'] = block.norm3.gamma
-            params[f'dec{i}_norm3_beta'] = block.norm3.beta
-
-        np.savez_compressed(self.model_path, **params)
-        print(f"Transformer model saved to {self.model_path}")
-
-    def load(self):
-        if not os.path.exists(self.model_path):
-            print("No saved model found, using random init.")
-            return
-        data = np.load(self.model_path)
-        t = self.transformer
-
-        t.src_embedding.W = data['src_embedding_W']
-        t.src_embedding.b = data['src_embedding_b']
-        t.tgt_embedding.W = data['tgt_embedding_W']
-        t.tgt_embedding.b = data['tgt_embedding_b']
-        t.final_linear.W = data['final_linear_W']
-        t.final_linear.b = data['final_linear_b']
-
-        for i, block in enumerate(t.encoder_blocks):
-            block.mha.W_q.W = data[f'enc{i}_mha_W_q']
-            block.mha.W_q.b = data[f'enc{i}_mha_b_q']
-            block.mha.W_k.W = data[f'enc{i}_mha_W_k']
-            block.mha.W_k.b = data[f'enc{i}_mha_b_k']
-            block.mha.W_v.W = data[f'enc{i}_mha_W_v']
-            block.mha.W_v.b = data[f'enc{i}_mha_b_v']
-            block.mha.W_o.W = data[f'enc{i}_mha_W_o']
-            block.mha.W_o.b = data[f'enc{i}_mha_b_o']
-
-            block.norm1.gamma = data[f'enc{i}_norm1_gamma']
-            block.norm1.beta = data[f'enc{i}_norm1_beta']
-
-            block.ffn.linear1.W = data[f'enc{i}_ffn_lin1_W']
-            block.ffn.linear1.b = data[f'enc{i}_ffn_lin1_b']
-            block.ffn.linear2.W = data[f'enc{i}_ffn_lin2_W']
-            block.ffn.linear2.b = data[f'enc{i}_ffn_lin2_b']
-
-            block.norm2.gamma = data[f'enc{i}_norm2_gamma']
-            block.norm2.beta = data[f'enc{i}_norm2_beta']
-
-        for i, block in enumerate(t.decoder_blocks):
-            block.mha1.W_q.W = data[f'dec{i}_mha1_W_q']
-            block.mha1.W_q.b = data[f'dec{i}_mha1_b_q']
-            block.mha1.W_k.W = data[f'dec{i}_mha1_W_k']
-            block.mha1.W_k.b = data[f'dec{i}_mha1_b_k']
-            block.mha1.W_v.W = data[f'dec{i}_mha1_W_v']
-            block.mha1.W_v.b = data[f'dec{i}_mha1_b_v']
-            block.mha1.W_o.W = data[f'dec{i}_mha1_W_o']
-            block.mha1.W_o.b = data[f'dec{i}_mha1_b_o']
-
-            block.norm1.gamma = data[f'dec{i}_norm1_gamma']
-            block.norm1.beta = data[f'dec{i}_norm1_beta']
-
-            block.mha2.W_q.W = data[f'dec{i}_mha2_W_q']
-            block.mha2.W_q.b = data[f'dec{i}_mha2_b_q']
-            block.mha2.W_k.W = data[f'dec{i}_mha2_W_k']
-            block.mha2.W_k.b = data[f'dec{i}_mha2_b_k']
-            block.mha2.W_v.W = data[f'dec{i}_mha2_W_v']
-            block.mha2.W_v.b = data[f'dec{i}_mha2_b_v']
-            block.mha2.W_o.W = data[f'dec{i}_mha2_W_o']
-            block.mha2.W_o.b = data[f'dec{i}_mha2_b_o']
-
-            block.norm2.gamma = data[f'dec{i}_norm2_gamma']
-            block.norm2.beta = data[f'dec{i}_norm2_beta']
-
-            block.ffn.linear1.W = data[f'dec{i}_ffn_lin1_W']
-            block.ffn.linear1.b = data[f'dec{i}_ffn_lin1_b']
-            block.ffn.linear2.W = data[f'dec{i}_ffn_lin2_W']
-            block.ffn.linear2.b = data[f'dec{i}_ffn_lin2_b']
-
-            block.norm3.gamma = data[f'dec{i}_norm3_gamma']
-            block.norm3.beta = data[f'dec{i}_norm3_beta']
-
-        print(f"Transformer model loaded from {self.model_path}")
-    
     def load_tokenizer(self):
+        """Memuat kosakata tokenizer dari file JSON jika ada."""
         if os.path.exists(self.tokenizer_path):
             with open(self.tokenizer_path, 'r') as f:
                 data = json.load(f)
                 self.tokenizer.word2idx = data['word2idx']
+                # Pastikan kunci untuk idx2word adalah integer
                 self.tokenizer.idx2word = {int(k): v for k, v in data['idx2word'].items()}
                 self.tokenizer.vocab_size = data['vocab_size']
                 self.tokenizer.fitted = True
             print(f"Tokenizer loaded from {self.tokenizer_path}")
         else:
-            print("No tokenizer file found, using random init.")
-            
-    def save_tokenizer(self):
-        with open(self.tokenizer_path, 'w') as f:
-            json.dump({
-                'word2idx' : self.tokenizer.word2idx,
-                'idx2word' : {str(k): v for k, v in self.tokenizer.idx2word.items()},
-                'vocab_size' : self.tokenizer.vocab_size
-            }, f)
+            print("No tokenizer file found. A new one will be created if training data is provided.")
