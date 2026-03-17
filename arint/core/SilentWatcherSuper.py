@@ -120,6 +120,35 @@ class SilentWatcherSuper:
 
     # ... (sisa metode kelas sama, tidak perlu diubah)
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# INTEGRATION: Bind run_cycle dan helper methods ke SilentWatcherSuper
+# ═══════════════════════════════════════════════════════════════════════════════
+
 # Ini harus menjadi baris terakhir, jangan pindahkan
 from .run_cycle import run_cycle
+from .run_cycle_methods import (
+    _select_action_with_fot_signals,
+    _execute_web_search,
+    _execute_siasie_cycle,
+    _execute_self_mutation,
+    _execute_expand_compute,
+    _execute_harvest_genes,
+    _execute_rest,
+    _execute_organize,
+    _execute_write_code,
+    _execute_run_evolution,
+    _calculate_reward
+)
+
 SilentWatcherSuper.run_cycle = run_cycle
+SilentWatcherSuper._select_action_with_fot_signals = _select_action_with_fot_signals
+SilentWatcherSuper._execute_web_search = _execute_web_search
+SilentWatcherSuper._execute_siasie_cycle = _execute_siasie_cycle
+SilentWatcherSuper._execute_self_mutation = _execute_self_mutation
+SilentWatcherSuper._execute_expand_compute = _execute_expand_compute
+SilentWatcherSuper._execute_harvest_genes = _execute_harvest_genes
+SilentWatcherSuper._execute_rest = _execute_rest
+SilentWatcherSuper._execute_organize = _execute_organize
+SilentWatcherSuper._execute_write_code = _execute_write_code
+SilentWatcherSuper._execute_run_evolution = _execute_run_evolution
+SilentWatcherSuper._calculate_reward = _calculate_reward
