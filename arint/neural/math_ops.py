@@ -1,25 +1,43 @@
+# neural/math_ops.py
+import math
 
-# arint/neural/math_ops.py
-import numpy as np
+class MathOps:
+    @staticmethod
+    def sigmoid(x):
+        x = max(-500, min(500, x))
+        return 1 / (1 + math.exp(-x))
 
-def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
-    """Menghitung cosine similarity antara dua vektor NumPy."""
-    # Pastikan input adalah float untuk menghindari masalah tipe data
-    v1 = v1.astype(float)
-    v2 = v2.astype(float)
+    @staticmethod
+    def sigmoid_derivative(z):
+        s = MathOps.sigmoid(z)
+        return s * (1 - s)
 
-    norm_v1 = np.linalg.norm(v1)
-    norm_v2 = np.linalg.norm(v2)
-    if norm_v1 == 0 or norm_v2 == 0:
-        return 0.0
-    
-    dot_product = np.dot(v1, v2)
-    similarity = dot_product / (norm_v1 * norm_v2)
-    return float(similarity)
+    @staticmethod
+    def sigmoid_derivative_from_a(a):
+        return a * (1 - a)
 
-def softmax(x: np.ndarray) -> np.ndarray:
-    """Menghitung softmax untuk mengubah skor menjadi probabilitas."""
-    e_x = np.exp(x - np.max(x)) # Mencegah overflow numerik
-    return e_x / e_x.sum(axis=0)
+    @staticmethod
+    def tanh_derivative(a):
+        return 1.0 - a**2
 
-# ... (Fungsi-fungsi matematika lain yang mungkin sudah ada atau akan ditambahkan)
+    @staticmethod
+    def dot(v1, v2):
+        return sum(x * y for x, y in zip(v1, v2))
+
+    @staticmethod
+    def softmax(logits):
+        max_logit = max(logits)
+        exps = [math.exp(l - max_logit) for l in logits]
+        sum_exp = sum(exps)
+        return [e / sum_exp for e in exps]
+
+    @staticmethod
+    def cross_entropy_loss(probs, target_idx):
+        return -math.log(probs[target_idx] + 1e-15)
+
+    @staticmethod
+    def cross_entropy_grad(logits, target_idx):
+        probs = MathOps.softmax(logits)
+        grad = probs[:]
+        grad[target_idx] -= 1.0
+        return grad
